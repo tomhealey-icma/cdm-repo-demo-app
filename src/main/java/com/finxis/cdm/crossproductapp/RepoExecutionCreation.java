@@ -35,10 +35,8 @@ import cdm.base.staticdata.asset.common.metafields.FieldWithMetaAssetClassEnum;
 import cdm.base.staticdata.asset.common.metafields.ReferenceWithMetaProductIdentifier;
 import cdm.base.staticdata.asset.rates.FloatingRateIndexEnum;
 import cdm.base.staticdata.party.*;
-import cdm.event.common.ExecutionDetails;
-import cdm.event.common.ExecutionInstruction;
-import cdm.event.common.ExecutionTypeEnum;
-import cdm.event.common.TradeIdentifier;
+import cdm.event.common.*;
+import cdm.event.common.metafields.ReferenceWithMetaCollateralPortfolio;
 import cdm.observable.asset.*;
 import cdm.observable.asset.metafields.FieldWithMetaPriceSchedule;
 import cdm.observable.asset.metafields.ReferenceWithMetaPriceSchedule;
@@ -454,6 +452,13 @@ public class RepoExecutionCreation{
 
 		BusinessCenterEnum businessCenterEnum = BusinessCenterEnum.valueOf(businessCenter);
 
+		ProductIdentifier collateralId = ProductIdentifier.builder()
+				.setIdentifier(FieldWithMetaString.builder()
+						.setValue(collateralISINStr)
+						.build());
+
+		GlobalKey collateralIdKey = addGlobalKey(ProductIdentifier.class, collateralId);
+
 		List<? extends FieldWithMetaBusinessCenterEnum> businessCenterEnumList =
 				List.of(FieldWithMetaBusinessCenterEnum.builder()
 								.setValue(businessCenterEnum)
@@ -493,9 +498,7 @@ public class RepoExecutionCreation{
 													.setScheme(scheme)
 													.setExternalKey("RepurchaseDate")
 													.setGlobalKey("RepurchaseDate")))))
-					.setCollateral(Collateral.builder()
-							.setCollateralProvisions(CollateralProvisions.builder()
-									.setEligibleCollateral(createRepoHairCut(haircutBD))))
+					.setCollateral(createCollateral(collateralISINStr, haircutBD))
 					.build();
 
 		} else if (rateType.equals("FLOAT")){
@@ -517,14 +520,46 @@ public class RepoExecutionCreation{
 													.setScheme(scheme)
 													.setExternalKey("RepurchaseDate")
 													.setGlobalKey("RepurchaseDate")))))
-					.setCollateral(Collateral.builder()
-							.setCollateralProvisions(CollateralProvisions.builder()
-											.setEligibleCollateral(this.createRepoHairCut(haircutBD))))
+					.setCollateral(createCollateral(collateralISINStr, haircutBD))
 					.build();
 
 		}
-
 			return ecterms;
+	}
+
+
+	private Collateral createCollateral(String collateralISINStr, BigDecimal haircutBD){
+
+		ProductIdentifier collateralId = ProductIdentifier.builder()
+				.setIdentifier(FieldWithMetaString.builder()
+						.setValue(collateralISINStr)
+						.build());
+
+		GlobalKey collateralIdKey = addGlobalKey(ProductIdentifier.class, collateralId);
+
+		Collateral collateral = Collateral.builder()
+					.setCollateralPortfolio(List.of(ReferenceWithMetaCollateralPortfolio.builder()
+							.setValue(CollateralPortfolio.builder()
+									.addCollateralPosition(List.of(CollateralPosition.builder()
+
+									.setTreatment(CollateralTreatment.builder()
+											.setValuationTreatment(CollateralValuationTreatment.builder()
+													.setHaircutPercentage(haircutBD)))
+													.setProduct(Product.builder()
+														.setSecurity(Security.builder()
+																.setProductIdentifier(List.of(ReferenceWithMetaProductIdentifier.builder()
+																		.setValue(ProductIdentifier.builder()
+																				.setSource(ProductIdTypeEnum.ISIN)
+																				.setIdentifier(FieldWithMetaString.builder()
+																						.setValue(collateralISINStr)
+																						.setMeta(MetaFields.builder()
+																								.setGlobalKey(getGlobalReference(collateralIdKey)))
+																				)))))))))))
+
+				.build();
+
+		return collateral;
+
 	}
 	private List<EligibleCollateralCriteria> createRepoHairCut(BigDecimal haircut) {
 

@@ -34,7 +34,8 @@ public class TradingPanel extends JPanel{
         constraints.gridx++;
         constraints.weighty = 10;
 
-        actionPanel = new ActionPanel(actionPanelModel, tradeEntryPanel, application);
+        actionPanel = new ActionPanel(tradeTableModel,actionPanelModel, tradeEntryPanel, application);
+        actionPanel.setPreferredSize(new Dimension(600,50));
         add(actionPanel, constraints);
 
 

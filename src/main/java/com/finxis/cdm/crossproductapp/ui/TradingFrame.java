@@ -13,7 +13,7 @@ public class TradingFrame extends JFrame {
     public TradingFrame(TradeTableModel tradeTableModel, TradeEntryModel tradeEntryModel, ActionPanelModel actionPanelModel, CdmTradingDemoApplication application){
         super();
         setTitle("CDM Demo Trade Booking App");
-        setSize(800,800);
+        setSize(800,1000);
 
         createMenuBar(application);
         getContentPane().add(new TradingPanel(tradeTableModel, tradeEntryModel, actionPanelModel, application), BorderLayout.CENTER);

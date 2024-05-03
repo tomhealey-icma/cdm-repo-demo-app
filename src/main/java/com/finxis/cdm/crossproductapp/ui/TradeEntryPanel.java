@@ -1,8 +1,8 @@
 package com.finxis.cdm.crossproductapp.ui;
 
 
-import cdm.event.common.Trade;
 import com.finxis.cdm.crossproductapp.*;
+import com.finxis.cdm.crossproductapp.Trade;
 import com.finxis.cdm.crossproductapp.util.ValidateDoubleTextField;
 import com.finxis.cdm.crossproductapp.util.ValidateIntegerTextField;
 
@@ -74,11 +74,11 @@ import com.rosetta.model.metafields.FieldWithMetaString;
 import com.rosetta.model.metafields.MetaFields;
 
 @SuppressWarnings("unchecked")
-public class TradeEntryPanel extends JPanel{
+public class TradeEntryPanel extends JPanel {
 
     public static CdmTradingDemo trainingApp;
 
-    public final JComboBox symbolComboBox = new JComboBox(TradeSymbol.toArray());
+    public final JComboBox symbolComboBox = new JComboBox(CollateralDescription.toArray());
     public final ValidateIntegerTextField quantityTextField = new ValidateIntegerTextField();
 
     public final JComboBox sideComboBox = new JComboBox(TradeSide.toArray());
@@ -291,7 +291,6 @@ public class TradeEntryPanel extends JPanel{
     public Integer fieldHeight;
 
 
-
     public TradeEntryPanel(final TradeEntryModel tradeEntryModel,
                            final CdmTradingDemoApplication application) {
         setName("TradeEntryPanel");
@@ -313,16 +312,15 @@ public class TradeEntryPanel extends JPanel{
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 
         GridBagConstraints gc = new GridBagConstraints();
-        gc.fill= GridBagConstraints.HORIZONTAL;
-        gc.weightx=1.0;
-        gc.weighty=1.0;
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.weightx = 1.0;
+        gc.weighty = 1.0;
 
         labelWidth = 150;
         labelHeight = 15;
         fieldWidth = 170;
         fieldHeight = 20;
         columnWidth = 15;
-
 
 
         repoTradePanel = new JPanel();
@@ -337,17 +335,15 @@ public class TradeEntryPanel extends JPanel{
         repoTradePanelCol3.setLayout(new BoxLayout(repoTradePanelCol3, BoxLayout.Y_AXIS));
 
 
-
         //Border redline = BorderFactory.createLineBorder(Color.red);
         Border blueline = BorderFactory.createLineBorder(Color.blue);
         //repoTradePanelCol1.setBorder(blueline);
         //repoTradePanelCol2.setBorder(blueline);
         //repoTradePanelCol3.setBorder(blueline);
         repoTradePanel.setBorder(blueline);
-        repoTradePanel.add(repoTradePanelCol1,constraints);
-        repoTradePanel.add(repoTradePanelCol2,constraints);
+        repoTradePanel.add(repoTradePanelCol1, constraints);
+        repoTradePanel.add(repoTradePanelCol2, constraints);
         //repoTradePanel.add(repoTradePanelCol3);
-
 
 
         IcmaRepoUtil ru = new IcmaRepoUtil();
@@ -363,7 +359,7 @@ public class TradeEntryPanel extends JPanel{
         firmLEIField.setAlignmentX(Component.LEFT_ALIGNMENT);
         firmLEIField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         firmLEIPanel.add(firmLEILabel);
-        firmLEIPanel.add(firmLEIField,gc);
+        firmLEIPanel.add(firmLEIField, gc);
         repoTradePanelCol1.add(firmLEIPanel);
         firmLEIField.setSelectedIndex(1);
 
@@ -377,7 +373,7 @@ public class TradeEntryPanel extends JPanel{
         transactionTypeField.setAlignmentX(Component.LEFT_ALIGNMENT);
         transactionTypeField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         transactionTypePanel.add(transactionTypeLabel);
-        transactionTypePanel.add(transactionTypeField,gc);
+        transactionTypePanel.add(transactionTypeField, gc);
         repoTradePanelCol1.add(transactionTypePanel);
 
         //Direction
@@ -390,7 +386,7 @@ public class TradeEntryPanel extends JPanel{
         tradeDirectionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         tradeDirectionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         tradeDirectionPanel.add(tradeDirectionLabel);
-        tradeDirectionPanel.add(tradeDirectionField,gc);
+        tradeDirectionPanel.add(tradeDirectionField, gc);
         repoTradePanelCol1.add(tradeDirectionPanel);
 
 
@@ -407,7 +403,7 @@ public class TradeEntryPanel extends JPanel{
 
         tradeDateField.setText(TDformattedDateTimeString);
         tradeDatePanel.add(tradeDateLabel);
-        tradeDatePanel.add(tradeDateField,gc);
+        tradeDatePanel.add(tradeDateField, gc);
         repoTradePanelCol1.add(tradeDatePanel);
 
 
@@ -421,7 +417,7 @@ public class TradeEntryPanel extends JPanel{
         PDformattedDateTimeString = PDzonedDateTime.format(formatter);
         purchaseDateField.setText(PDformattedDateTimeString);
         purchaseDatePanel.add(purchaseDateLabel);
-        purchaseDatePanel.add(purchaseDateField,gc);
+        purchaseDatePanel.add(purchaseDateField, gc);
         repoTradePanelCol1.add(purchaseDatePanel);
 
 
@@ -436,7 +432,7 @@ public class TradeEntryPanel extends JPanel{
 
         repurchaseDateField.setText(RDformattedDateTimeString);
         repurchaseDatePanel.add(repurchaseDateLabel);
-        repurchaseDatePanel.add(repurchaseDateField,gc);
+        repurchaseDatePanel.add(repurchaseDateField, gc);
         repoTradePanelCol1.add(repurchaseDatePanel);
 
         repurchaseDateField.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
@@ -457,10 +453,10 @@ public class TradeEntryPanel extends JPanel{
         tradeUTILabel.setPreferredSize(new Dimension(labelWidth, labelHeight));
         tradeUTIField = new JTextField(labelHeight);
         String tdt = this.tradeDateField.getText();
-        String tradeUTIStr="";
+        String tradeUTIStr = "";
 
         tradeUTIPanel.add(tradeUTILabel);
-        tradeUTIPanel.add(tradeUTIField,gc);
+        tradeUTIPanel.add(tradeUTIField, gc);
         repoTradePanelCol1.add(tradeUTIPanel);
 
         //Buyer
@@ -474,7 +470,7 @@ public class TradeEntryPanel extends JPanel{
         buyerLEIField.setAlignmentX(Component.LEFT_ALIGNMENT);
         buyerLEIField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         buyerLEIPanel.add(buyerLEILabel);
-        buyerLEIPanel.add(buyerLEIField,gc);
+        buyerLEIPanel.add(buyerLEIField, gc);
         repoTradePanelCol1.add(buyerLEIPanel);
 
         //Seller
@@ -489,7 +485,7 @@ public class TradeEntryPanel extends JPanel{
         sellerLEIField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
 
         sellerLEIPanel.add(sellerLEILabel);
-        sellerLEIPanel.add(sellerLEIField,gc);
+        sellerLEIPanel.add(sellerLEIField, gc);
         repoTradePanelCol1.add(sellerLEIPanel);
 
         //Collateral Type
@@ -503,7 +499,7 @@ public class TradeEntryPanel extends JPanel{
         collateralTypeField.setAlignmentX(Component.LEFT_ALIGNMENT);
         collateralTypeField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         collateralTypePanel.add(collateralTypeLabel);
-        collateralTypePanel.add(collateralTypeField,gc);
+        collateralTypePanel.add(collateralTypeField, gc);
 
         collateralTypeField.addItemListener(new ItemListener() {
             @Override
@@ -529,7 +525,7 @@ public class TradeEntryPanel extends JPanel{
         collateralDescriptionField = new JTextField(labelHeight);
         collateralDescriptionField.setText("GILT .5 22/07/2022");
         collateralDescriptionPanel.add(collateralDescriptionLabel);
-        collateralDescriptionPanel.add(collateralDescriptionField,gc);
+        collateralDescriptionPanel.add(collateralDescriptionField, gc);
         repoTradePanelCol1.add(collateralDescriptionPanel);
 
         JPanel collateralISINPanel = new JPanel(new GridBagLayout());
@@ -538,7 +534,7 @@ public class TradeEntryPanel extends JPanel{
         collateralISINField = new JTextField(labelHeight);
         collateralISINField.setText("GB00BD0PCK97");
         collateralISINPanel.add(collateralISINLabel);
-        collateralISINPanel.add(collateralISINField,gc);
+        collateralISINPanel.add(collateralISINField, gc);
         repoTradePanelCol1.add(collateralISINPanel);
 
         JPanel collateralQuantityPanel = new JPanel(new GridBagLayout());
@@ -547,7 +543,7 @@ public class TradeEntryPanel extends JPanel{
         collateralQuantityField = new JTextField(labelHeight);
         collateralQuantityField.setText("1000");
         collateralQuantityPanel.add(collateralQuantityLabel);
-        collateralQuantityPanel.add(collateralQuantityField,gc);
+        collateralQuantityPanel.add(collateralQuantityField, gc);
         repoTradePanelCol1.add(collateralQuantityPanel);
 
         collateralQuantityField.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
@@ -569,7 +565,7 @@ public class TradeEntryPanel extends JPanel{
         collateralCleanPriceField = new JTextField(labelHeight);
         collateralCleanPriceField.setText("100.75");
         collateralCleanPricePanel.add(collateralCleanPriceLabel);
-        collateralCleanPricePanel.add(collateralCleanPriceField,gc);
+        collateralCleanPricePanel.add(collateralCleanPriceField, gc);
         repoTradePanelCol1.add(collateralCleanPricePanel);
 
         JPanel collateralDirtyPricePanel = new JPanel(new GridBagLayout());
@@ -578,7 +574,7 @@ public class TradeEntryPanel extends JPanel{
         collateralDirtyPriceField = new JTextField(labelHeight);
         collateralDirtyPriceField.setText("100.8066");
         collateralDirtyPricePanel.add(collateralDirtyPriceLabel);
-        collateralDirtyPricePanel.add(collateralDirtyPriceField,gc);
+        collateralDirtyPricePanel.add(collateralDirtyPriceField, gc);
         repoTradePanelCol1.add(collateralDirtyPricePanel);
 
 
@@ -600,7 +596,7 @@ public class TradeEntryPanel extends JPanel{
         collateralAdjustedValueField = new JTextField(labelHeight);
         collateralAdjustedValueField.setText("1008066.00");
         collateralAdjustedValuePanel.add(collateralAdjustedValueLabel);
-        collateralAdjustedValuePanel.add(collateralAdjustedValueField,gc);
+        collateralAdjustedValuePanel.add(collateralAdjustedValueField, gc);
         repoTradePanelCol1.add(collateralAdjustedValuePanel);
 
         JPanel collateralCurrencyPanel = new JPanel(new GridBagLayout());
@@ -609,7 +605,7 @@ public class TradeEntryPanel extends JPanel{
         collateralCurrencyField = new JTextField(labelHeight);
         collateralCurrencyField.setText("GBP");
         collateralCurrencyPanel.add(collateralCurrencyLabel);
-        collateralCurrencyPanel.add(collateralCurrencyField,gc);
+        collateralCurrencyPanel.add(collateralCurrencyField, gc);
         repoTradePanelCol1.add(collateralCurrencyPanel);
 
 
@@ -623,7 +619,7 @@ public class TradeEntryPanel extends JPanel{
         rateTypeField.setAlignmentX(Component.LEFT_ALIGNMENT);
         rateTypeField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         rateTypePanel.add(rateTypeLabel);
-        rateTypePanel.add(rateTypeField,gc);
+        rateTypePanel.add(rateTypeField, gc);
 
         rateTypeField.addItemListener(new ItemListener() {
             @Override
@@ -643,7 +639,7 @@ public class TradeEntryPanel extends JPanel{
         repoRateField = new JTextField(labelHeight);
         repoRateField.setText("4.65");
         repoRatePanel.add(repoRateLabel);
-        repoRatePanel.add(repoRateField,gc);
+        repoRatePanel.add(repoRateField, gc);
         repoTradePanelCol1.add(repoRatePanel);
 
         repoRateField.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
@@ -665,7 +661,7 @@ public class TradeEntryPanel extends JPanel{
         cashCurrencyField = new JTextField(labelHeight);
         cashCurrencyField.setText("GBP");
         cashCurrencyPanel.add(cashCurrencyLabel);
-        cashCurrencyPanel.add(cashCurrencyField,gc);
+        cashCurrencyPanel.add(cashCurrencyField, gc);
         repoTradePanelCol1.add(cashCurrencyPanel);
 
 
@@ -675,7 +671,7 @@ public class TradeEntryPanel extends JPanel{
         haircutField = new JTextField(labelHeight);
         haircutField.setText("2");
         haircutPanel.add(haircutLabel);
-        haircutPanel.add(haircutField,gc);
+        haircutPanel.add(haircutField, gc);
         repoTradePanelCol1.add(haircutPanel);
 
         haircutField.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
@@ -704,7 +700,7 @@ public class TradeEntryPanel extends JPanel{
 
         termTypeField.setSelectedItem("FIXED");
         termTypePanel.add(termTypeLabel);
-        termTypePanel.add(termTypeField,gc);
+        termTypePanel.add(termTypeField, gc);
         repoTradePanelCol1.add(termTypePanel);
 
 
@@ -730,7 +726,7 @@ public class TradeEntryPanel extends JPanel{
         terminationOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         terminationOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         terminationOptionPanel.add(terminationOptionLabel);
-        terminationOptionPanel.add(terminationOptionField,gc);
+        terminationOptionPanel.add(terminationOptionField, gc);
         repoTradePanelCol1.add(terminationOptionPanel);
 
 
@@ -740,7 +736,7 @@ public class TradeEntryPanel extends JPanel{
         noticePeriodField = new JTextField(labelHeight);
         noticePeriodField.setText("0");
         noticePeriodPanel.add(noticePeriodLabel);
-        noticePeriodPanel.add(noticePeriodField,gc);
+        noticePeriodPanel.add(noticePeriodField, gc);
         repoTradePanelCol1.add(noticePeriodPanel);
 
         //Delivery Method
@@ -754,7 +750,7 @@ public class TradeEntryPanel extends JPanel{
         deliveryMethodField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
 
         deliveryMethodPanel.add(deliveryMethodLabel);
-        deliveryMethodPanel.add(deliveryMethodField,gc);
+        deliveryMethodPanel.add(deliveryMethodField, gc);
         repoTradePanelCol1.add(deliveryMethodPanel);
 
         //Substitution
@@ -767,7 +763,7 @@ public class TradeEntryPanel extends JPanel{
         substitutionAllowedField.setAlignmentX(Component.LEFT_ALIGNMENT);
         substitutionAllowedField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         substitutionAllowedPanel.add(substitutionAllowedLabel);
-        substitutionAllowedPanel.add(substitutionAllowedField,gc);
+        substitutionAllowedPanel.add(substitutionAllowedField, gc);
         repoTradePanelCol1.add(substitutionAllowedPanel);
 
 
@@ -778,7 +774,7 @@ public class TradeEntryPanel extends JPanel{
         dayCountFractionField = new JTextField(labelHeight);
         dayCountFractionField.setText("ACT/360");
         dayCountFractionPanel.add(dayCountFractionLabel);
-        dayCountFractionPanel.add(dayCountFractionField,gc);
+        dayCountFractionPanel.add(dayCountFractionField, gc);
         repoTradePanelCol1.add(dayCountFractionPanel);
 
         //Day Count
@@ -788,7 +784,7 @@ public class TradeEntryPanel extends JPanel{
         termDaysField = new JTextField(labelHeight);
         termDaysField.setText("1");
         termDaysPanel.add(termDaysLabel);
-        termDaysPanel.add(termDaysField,gc);
+        termDaysPanel.add(termDaysField, gc);
         repoTradePanelCol1.add(termDaysPanel);
 
         long daysBetween = Duration.between(PDzonedDateTime, RDzonedDateTime).toDays();
@@ -810,7 +806,7 @@ public class TradeEntryPanel extends JPanel{
         String purchasePriceStr = formatter.format(pp);
         purchasePriceField.setText(purchasePriceStr);
         purchasePricePanel.add(purchasePriceLabel);
-        purchasePricePanel.add(purchasePriceField,gc);
+        purchasePricePanel.add(purchasePriceField, gc);
         repoTradePanelCol1.add(purchasePricePanel);
 
         //Repurchase Price
@@ -825,9 +821,8 @@ public class TradeEntryPanel extends JPanel{
         repurchasePriceField.setText(repurchasePriceStr);
 
         repurchasePricePanel.add(repurchasePriceLabel);
-        repurchasePricePanel.add(repurchasePriceField,gc);
+        repurchasePricePanel.add(repurchasePriceField, gc);
         repoTradePanelCol1.add(repurchasePricePanel);
-
 
 
         //Panel 2
@@ -842,7 +837,7 @@ public class TradeEntryPanel extends JPanel{
         tradingBookOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         tradingBookOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         tradingBookOptionPanel.add(tradingBookOptionLabel);
-        tradingBookOptionPanel.add(tradingBookOptionField,gc);
+        tradingBookOptionPanel.add(tradingBookOptionField, gc);
         repoTradePanelCol2.add(tradingBookOptionPanel);
 
 
@@ -856,7 +851,7 @@ public class TradeEntryPanel extends JPanel{
         businessCenterOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         businessCenterOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         businessCenterOptionPanel.add(businessCenterOptionLabel);
-        businessCenterOptionPanel.add(businessCenterOptionField,gc);
+        businessCenterOptionPanel.add(businessCenterOptionField, gc);
         repoTradePanelCol2.add(businessCenterOptionPanel);
 
         //TimeZone
@@ -869,7 +864,7 @@ public class TradeEntryPanel extends JPanel{
         timeZoneOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         timeZoneOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         timeZoneOptionPanel.add(timeZoneOptionLabel);
-        timeZoneOptionPanel.add(timeZoneOptionField,gc);
+        timeZoneOptionPanel.add(timeZoneOptionField, gc);
         repoTradePanelCol2.add(timeZoneOptionPanel);
 
         //Execution Time
@@ -883,11 +878,11 @@ public class TradeEntryPanel extends JPanel{
         ETformattedDateTimeString = ETzonedDateTime.format(ETformatter);
         executionTimeField.setText(ETformattedDateTimeString);
         executionTimePanel.add(executionTimeLabel);
-        executionTimePanel.add(executionTimeField,gc);
+        executionTimePanel.add(executionTimeField, gc);
         repoTradePanelCol2.add(executionTimePanel);
 
         //Set the UTI now that time is set
-        tradeUTIStr = "ICMA"+ tdt.trim().replaceAll("-", "") + executionTimeField.getText().trim().replaceAll("\\s", "");
+        tradeUTIStr = "ICMA" + tdt.trim().replaceAll("-", "") + executionTimeField.getText().trim().replaceAll("\\s", "");
         tradeUTIField.setText(tradeUTIStr);
 
         //Venue
@@ -900,7 +895,7 @@ public class TradeEntryPanel extends JPanel{
         venueCodeOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         venueCodeOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         venueCodeOptionPanel.add(venueCodeOptionLabel);
-        venueCodeOptionPanel.add(venueCodeOptionField,gc);
+        venueCodeOptionPanel.add(venueCodeOptionField, gc);
         repoTradePanelCol2.add(venueCodeOptionPanel);
 
         //Settlement Agent
@@ -921,7 +916,7 @@ public class TradeEntryPanel extends JPanel{
         settlementAgentOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         settlementAgentOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         settlementAgentOptionPanel.add(settlementAgentOptionLabel);
-        settlementAgentOptionPanel.add(settlementAgentOptionField,gc);
+        settlementAgentOptionPanel.add(settlementAgentOptionField, gc);
         repoTradePanelCol2.add(settlementAgentOptionPanel);
 
         //CCP
@@ -936,7 +931,7 @@ public class TradeEntryPanel extends JPanel{
         centralClearingCounterpartyOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         centralClearingCounterpartyOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         centralClearingCounterpartyOptionPanel.add(centralClearingCounterpartyOptionLabel);
-        centralClearingCounterpartyOptionPanel.add(centralClearingCounterpartyOptionField,gc);
+        centralClearingCounterpartyOptionPanel.add(centralClearingCounterpartyOptionField, gc);
         repoTradePanelCol2.add(centralClearingCounterpartyOptionPanel);
 
 
@@ -950,7 +945,7 @@ public class TradeEntryPanel extends JPanel{
         csdOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         csdOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         csdOptionPanel.add(csdOptionLabel);
-        csdOptionPanel.add(csdOptionField,gc);
+        csdOptionPanel.add(csdOptionField, gc);
         repoTradePanelCol2.add(csdOptionPanel);
 
         //Clearing Member
@@ -965,7 +960,7 @@ public class TradeEntryPanel extends JPanel{
         clearingMemberField.setAlignmentX(Component.LEFT_ALIGNMENT);
         clearingMemberField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         clearingMemberPanel.add(clearingMemberLabel);
-        clearingMemberPanel.add(clearingMemberField,gc);
+        clearingMemberPanel.add(clearingMemberField, gc);
         repoTradePanelCol2.add(clearingMemberPanel);
 
 
@@ -980,7 +975,7 @@ public class TradeEntryPanel extends JPanel{
         agentLenderField.setAlignmentX(Component.LEFT_ALIGNMENT);
         agentLenderField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         agentLenderPanel.add(agentLenderLabel);
-        agentLenderPanel.add(agentLenderField,gc);
+        agentLenderPanel.add(agentLenderField, gc);
         repoTradePanelCol2.add(agentLenderPanel);
 
         //Broker
@@ -995,7 +990,7 @@ public class TradeEntryPanel extends JPanel{
         brokerField.setAlignmentX(Component.LEFT_ALIGNMENT);
         brokerField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         brokerPanel.add(brokerLabel);
-        brokerPanel.add(brokerField,gc);
+        brokerPanel.add(brokerField, gc);
         repoTradePanelCol2.add(brokerPanel);
 
         //TriParty Agent
@@ -1011,7 +1006,7 @@ public class TradeEntryPanel extends JPanel{
         tripartyField.setAlignmentX(Component.LEFT_ALIGNMENT);
         tripartyField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         tripartyPanel.add(tripartyLabel);
-        tripartyPanel.add(tripartyField,gc);
+        tripartyPanel.add(tripartyField, gc);
         repoTradePanelCol2.add(tripartyPanel);
 
         //Beneficiary
@@ -1025,7 +1020,7 @@ public class TradeEntryPanel extends JPanel{
         beneficiaryField.setAlignmentX(Component.LEFT_ALIGNMENT);
         beneficiaryField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         beneficiaryPanel.add(beneficiaryLabel);
-        beneficiaryPanel.add(beneficiaryField,gc);
+        beneficiaryPanel.add(beneficiaryField, gc);
         repoTradePanelCol2.add(beneficiaryPanel);
 
 
@@ -1036,7 +1031,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRateReferenceField = new JTextField(labelHeight);
 
         floatingRateReferencePanel.add(floatingRateReferenceLabel);
-        floatingRateReferencePanel.add(floatingRateReferenceField,gc);
+        floatingRateReferencePanel.add(floatingRateReferenceField, gc);
         floatingRateReferenceField.setEnabled(false);
         repoTradePanelCol2.add(floatingRateReferencePanel);
 
@@ -1052,7 +1047,7 @@ public class TradeEntryPanel extends JPanel{
 
 
         floatingRateReferencePeriodPanel.add(floatingRateReferencePeriodLabel);
-        floatingRateReferencePeriodPanel.add(floatingRateReferencePeriodField,gc);
+        floatingRateReferencePeriodPanel.add(floatingRateReferencePeriodField, gc);
         floatingRateReferencePeriodField.setEnabled(false);
         repoTradePanelCol2.add(floatingRateReferencePeriodPanel);
 
@@ -1064,7 +1059,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRateReferenceMultiplierField = new JTextField(labelHeight);
 
         floatingRateReferenceMultiplierPanel.add(floatingRateReferenceMultiplierLabel);
-        floatingRateReferenceMultiplierPanel.add(floatingRateReferenceMultiplierField,gc);
+        floatingRateReferenceMultiplierPanel.add(floatingRateReferenceMultiplierField, gc);
         repoTradePanelCol2.add(floatingRateReferenceMultiplierPanel);
 
         //Floating Payment Frequency
@@ -1078,7 +1073,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRatePaymentFreqField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
 
         floatingRatePaymentFreqPanel.add(floatingRatePaymentFreqLabel);
-        floatingRatePaymentFreqPanel.add(floatingRatePaymentFreqField,gc);
+        floatingRatePaymentFreqPanel.add(floatingRatePaymentFreqField, gc);
         floatingRatePaymentFreqField.setEnabled(false);
         repoTradePanelCol2.add(floatingRatePaymentFreqPanel);
 
@@ -1089,7 +1084,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRatePaymentMultiplierField = new JTextField(labelHeight);
 
         floatingRatePaymentMultiplierPanel.add(floatingRatePaymentMultiplierLabel);
-        floatingRatePaymentMultiplierPanel.add(floatingRatePaymentMultiplierField,gc);
+        floatingRatePaymentMultiplierPanel.add(floatingRatePaymentMultiplierField, gc);
         floatingRatePaymentMultiplierField.setEnabled(false);
         repoTradePanelCol2.add(floatingRatePaymentMultiplierPanel);
 
@@ -1102,7 +1097,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRateResetFreqField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
 
         floatingRateResetFreqPanel.add(floatingRateResetFreqLabel);
-        floatingRateResetFreqPanel.add(floatingRateResetFreqField,gc);
+        floatingRateResetFreqPanel.add(floatingRateResetFreqField, gc);
         floatingRateResetFreqField.setEnabled(false);
         repoTradePanelCol2.add(floatingRateResetFreqPanel);
 
@@ -1113,7 +1108,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRateResetMultiplierField = new JTextField(labelHeight);
 
         floatingRateResetMultiplierPanel.add(floatingRateResetMultiplierLabel);
-        floatingRateResetMultiplierPanel.add(floatingRateResetMultiplierField,gc);
+        floatingRateResetMultiplierPanel.add(floatingRateResetMultiplierField, gc);
         floatingRateResetMultiplierField.setEnabled(false);
         repoTradePanelCol2.add(floatingRateResetMultiplierPanel);
 
@@ -1124,7 +1119,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRateField = new JTextField(labelHeight);
 
         floatingRatePanel.add(floatingRateLabel);
-        floatingRatePanel.add(floatingRateField,gc);
+        floatingRatePanel.add(floatingRateField, gc);
         floatingRateField.setEnabled(false);
         repoTradePanelCol2.add(floatingRatePanel);
 
@@ -1148,7 +1143,7 @@ public class TradeEntryPanel extends JPanel{
         floatingRateSpreadField = new JTextField(labelHeight);
 
         floatingRateSpreadPanel.add(floatingRateSpreadLabel);
-        floatingRateSpreadPanel.add(floatingRateSpreadField,gc);
+        floatingRateSpreadPanel.add(floatingRateSpreadField, gc);
         floatingRateSpreadField.setEnabled(false);
         repoTradePanelCol2.add(floatingRateSpreadPanel);
 
@@ -1176,7 +1171,7 @@ public class TradeEntryPanel extends JPanel{
         agreementNameField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
 
         agreementNamePanel.add(agreementNameLabel);
-        agreementNamePanel.add(agreementNameField,gc);
+        agreementNamePanel.add(agreementNameField, gc);
         repoTradePanelCol2.add(agreementNamePanel);
 
 
@@ -1187,7 +1182,7 @@ public class TradeEntryPanel extends JPanel{
         agreementVersionField = new JTextField(labelHeight);
         agreementVersionField.setText("2011");
         agreementVersionPanel.add(agreementVersionLabel);
-        agreementVersionPanel.add(agreementVersionField,gc);
+        agreementVersionPanel.add(agreementVersionField, gc);
         repoTradePanelCol2.add(agreementVersionPanel);
 
         //Other AgreementName
@@ -1198,7 +1193,7 @@ public class TradeEntryPanel extends JPanel{
 
         otherAgreementNameField.setText("");
         otherAgreementNamePanel.add(otherAgreementNameLabel);
-        otherAgreementNamePanel.add(otherAgreementNameField,gc);
+        otherAgreementNamePanel.add(otherAgreementNameField, gc);
         repoTradePanelCol2.add(otherAgreementNamePanel);
 
         //Trade ID
@@ -1208,7 +1203,7 @@ public class TradeEntryPanel extends JPanel{
         tradeIdField = new JTextField(labelHeight);
         tradeIdField.setText("");
         tradeIdPanel.add(tradeIdLabel);
-        tradeIdPanel.add(tradeIdField,gc);
+        tradeIdPanel.add(tradeIdField, gc);
         repoTradePanelCol2.add(tradeIdPanel);
 
         //Trade Status
@@ -1218,7 +1213,7 @@ public class TradeEntryPanel extends JPanel{
         statusField = new JTextField(labelHeight);
         statusField.setText("NEW");
         statusPanel.add(statusLabel);
-        statusPanel.add(statusField,gc);
+        statusPanel.add(statusField, gc);
         repoTradePanelCol2.add(statusPanel);
 
 
@@ -1240,7 +1235,7 @@ public class TradeEntryPanel extends JPanel{
         reportingEntityOptionField.setAlignmentX(Component.LEFT_ALIGNMENT);
         reportingEntityOptionField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
         reportingEntityOptionPanel.add(reportingEntityOptionLabel);
-        reportingEntityOptionPanel.add(reportingEntityOptionField,gc);
+        reportingEntityOptionPanel.add(reportingEntityOptionField, gc);
         repoTradePanelCol2.add(reportingEntityOptionPanel);
 
 
@@ -1255,18 +1250,18 @@ public class TradeEntryPanel extends JPanel{
         reportingSideField.setPreferredSize(new Dimension(fieldWidth, fieldHeight));
 
         reportingSidePanel.add(reportingSideLabel);
-        reportingSidePanel.add(reportingSideField,gc);
+        reportingSidePanel.add(reportingSideField, gc);
         repoTradePanelCol2.add(reportingSidePanel);
 
         JPanel fillerPanel = new JPanel(new GridBagLayout());
         JLabel fillerLabel = new JLabel("", JLabel.LEFT);
-        fillerLabel.setPreferredSize(new Dimension(labelWidth+fieldWidth, fieldHeight));
-        fillerPanel.add(fillerLabel,gc);
-        repoTradePanelCol2.add(fillerPanel,gc);
+        fillerLabel.setPreferredSize(new Dimension(labelWidth + fieldWidth, fieldHeight));
+        fillerPanel.add(fillerLabel, gc);
+        repoTradePanelCol2.add(fillerPanel, gc);
 
 
-        tradeEntryModel.add(repoTradePanel,constraints);
-        add(tradeEntryModel,0,0);
+        tradeEntryModel.add(repoTradePanel, constraints);
+        add(tradeEntryModel, 0, 0);
 
 
     }
@@ -1456,6 +1451,7 @@ public class TradeEntryPanel extends JPanel{
 
         }
     }
+
     public void updateTotalsXPrice() {
 
         //System.out.println("Update Totals");
@@ -1511,4 +1507,32 @@ public class TradeEntryPanel extends JPanel{
 
     }
 
+    private class SubmitActivator implements KeyListener, ItemListener {
+        public void keyReleased(KeyEvent e) {
+            Object obj = e.getSource();
+            if (obj == symbolComboBox) {
+                //symbolEntered = testField(obj);
+            } else if (obj == quantityTextField) {
+                //quantityEntered = testField(obj);
+            }
+            activateSubmit();
+        }
+
+        public void itemStateChanged(ItemEvent e) {
+            //sessionEntered = sessionComboBox.getSelectedItem() != null;
+            activateSubmit();
+        }
+
+        private boolean testField(Object o) {
+            String value = ((JTextField) o).getText();
+            value = value.trim();
+            return value.length() > 0;
+        }
+
+        public void keyTyped(KeyEvent e) {}
+
+        public void keyPressed(KeyEvent e) {}
+    }
 }
+
+

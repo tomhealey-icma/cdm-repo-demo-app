@@ -412,6 +412,11 @@ public class RepoLifeCycle {
 				.addEventReferenceValue(cwfs)
 				.build();
 
+		//Output workflow json
+		String workflowJson = RosettaObjectMapper.getNewRosettaObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ewf);
+		ru.writeEventToFile("icma-repo-execution-workflow", eventDateTime, workflowJson);
+		//End output workflow json
+
 		String repoBusinesseventJson = RosettaObjectMapper.getNewRosettaObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(businessEvent);
 
 		return repoBusinesseventJson;

@@ -1,7 +1,19 @@
 package com.finxis.cdm.crossproductapp;
 
 public class Trade implements Cloneable {
-    private TradeSymbol symbol = null;
+    private CollateralDescription collateralDescription = null;
+
+    private String purchasePrice = null;
+    private String repurchasePrice = null;
+    private String repoInterest = null;
+    private String repoRate = null;
+
+    private String haircut = null;
+
+    private String startDate = null;
+
+    private String endDate = null;
+
     private int quantity = 0;
     private double price = 0;
 
@@ -37,12 +49,12 @@ public class Trade implements Cloneable {
     }
 
 
-    public TradeSymbol getSymbol() {
-        return symbol;
+    public CollateralDescription getCollateralDescription() {
+        return collateralDescription;
     }
 
-    public void setSymbol(TradeSymbol symbol) {
-        this.symbol = symbol;
+    public void setCollateralDescription(CollateralDescription symbol) {
+        this.collateralDescription = symbol;
     }
 
     public int getQuantity() {
@@ -65,10 +77,41 @@ public class Trade implements Cloneable {
         return side;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+    
+    public String getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(String purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public String getRepurchasePrice() {
+        return repurchasePrice;
+    }
+
+    public void setRepurchasePrice(String repurchasePrice) {
+        this.repurchasePrice = repurchasePrice;
+    }
+
     public void setSide(TradeSide side) {
         this.side = side;
     }
 
+    public String getRepoRate() {
+        return repoRate;
+    }
+
+    public void setRepoRate(String repoRate) {
+        this.repoRate = repoRate;
+    }
 
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;

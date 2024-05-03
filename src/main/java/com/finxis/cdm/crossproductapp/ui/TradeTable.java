@@ -36,7 +36,7 @@ public class TradeTable extends JTable implements MouseListener {
             return;
         int row = rowAtPoint(e.getPoint());
         Trade trade = ((TradeTableModel) dataModel).getTrade(row);
-        application.cancel(trade);
+        //application.cancel(trade);
     }
 
     public void mouseEntered(MouseEvent e) {}
