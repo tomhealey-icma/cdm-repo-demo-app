@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CdmNewTradeWorkflow xmlns="urn:icma:xsd:ICMARepoNewTrade" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:icma:xsd:ICMARepoNewTrade icma-cdm-repo-trade.xsd">
+    <Workflow/>
+</CdmNewTradeWorkflow>

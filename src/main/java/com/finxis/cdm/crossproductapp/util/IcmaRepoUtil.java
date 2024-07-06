@@ -33,6 +33,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import cdm.base.datetime.*;
 import cdm.base.datetime.AdjustableDate;
@@ -98,6 +101,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
@@ -174,7 +178,7 @@ public class IcmaRepoUtil {
 
 		Party party;
 
-		if ((partyId.equals("")) && (pName.equals("")))
+		if  (( partyId == null) || (partyId.equals("")) && (pName.equals("")))
 			party = null;
 		else{
 			party = addGlobalKey(Party.class,
@@ -519,9 +523,43 @@ public class IcmaRepoUtil {
 		return jb;
 	}
 
+	static SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
 
+	public GregorianCalendar convertFromDMY(String dd_mm_yy) throws ParseException{
 
+		// this actually works, got rid of the original code idea
+		String[] splitDate = dd_mm_yy.split("-");
+		int days = Integer.parseInt(splitDate[0]);
+		int month = (Integer.parseInt(splitDate[1]) - 1);
+		int year = Integer.parseInt(splitDate[2]);
 
+		// dates go in properly
+		GregorianCalendar dateConverted = new GregorianCalendar(year, month, days);
+		String finalDate = convertGregorianCalendar(dateConverted);
+		return dateConverted;
+	}
+
+	public String convertGregorianCalendar(GregorianCalendar date) throws ParseException{
+
+		fmt.setCalendar(date);
+		String dateFormatted = fmt.format(date.getTime());
+		System.out.println(dateFormatted);
+		return dateFormatted;
+	}
+
+	public XMLGregorianCalendar convertStringtoGrgorianCalendar(String dateAsString) throws DatatypeConfigurationException {
+		LocalDate localDate = LocalDate.parse(dateAsString);
+		return DatatypeFactory.newInstance().newXMLGregorianCalendar(localDate.toString());
+	}
+
+	public Double doubleParseStr (String s){
+
+		if(s==null | s ==""){
+			s="0.0";
+		}
+
+		return Double.valueOf(s);
+	}
 
 }
 

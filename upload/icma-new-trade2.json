@@ -1,0 +1,89 @@
+{
+	"CdmNewTradeWorkflow": {
+		"Workflow": {
+			"WorkflowName": "ICMARepoWorkflow",
+			"WorkflowStep": {
+				"WorkflowStepName": "NewTrade",
+				"TransactionDate": "2024-01-18",
+				"PurchaseDate": "2024-01-18",
+				"RepurchaseDate": "2024-01-19",
+				"TradeIdentifier": {
+					"UTI": 1001
+				},
+				"TradeType": "REPURCHASE",
+				"Seller": {
+					"LEIName": "SL-BANK",
+					"LEI": "7245009UXRIGIRYOBR48"
+				},
+				"Buyer": {
+					"LEIName": "BY-BANK",
+					"LEI": "8IBZUGJ7JPLH368JE346"
+				},
+				"TermType": "TERM",
+				"RateType": "FIXED",
+				"DayCount": "ICMA_365",
+				"CollateralList": {
+					"Collateral": {
+						"Description": "GILT .5 22/07/2022",
+						"ISIN": "GB00BD0PCK97",
+						"Currency": "GBP",
+						"NominalPerUnitAmount": 1000,
+						"DayCount": "ICMA_365",
+						"InterestRate": 0.5,
+						"InterestPaymentFrequency": "SA",
+						"NominalAmount": 10000,
+						"CleanPrice": 100.75,
+						"AccruedInterestPrice": 0.0566,
+						"AccruedInterestAmount": 5660,
+						"DirtyPrice": 100.8066,
+						"UnAdjustedSettlementValue": 10080660,
+						"Margin": 100,
+						"AdjustedSettlementValue": 10080660,
+						"Haircut": 2,
+						"SettlementAmount": 9879046.8
+					}
+				},
+				"Loan": {
+					"LoanAmount": 9879046.8,
+					"LoanCurrency": "GBP"
+				},
+				"RepoRate": {
+					"FixedRate": {
+						"Value": 0.4
+					},
+					"Floating": {
+						"FloatingRateIndex": "",
+						"FloatingRateIndexFreq": "",
+						"FloatingRateIndexRate": "",
+						"FloatingRateIndexSpread": ""
+					}
+				},
+				"PurchasePrice": 9879046.8,
+				"ProjectedInterest": 108.26,
+				"RepurchasePrice": 9879155.06,
+				"Optionality": {
+					"TerminationOnDemand": "N",
+					"NoticePeriod": 2
+				},
+				"DeliveryMethod": "DVP",
+				"Substitution": {
+					"Allowed": "N",
+					"NumberAllowed": 0
+				},
+				"Agreement": {
+					"AgreementName": "GMRA",
+					"AgreementIssuer": "ICMA",
+					"AgreementGoverningLaw": "UK",
+					"AgreementDate": 2011,
+					"AgreementVersion": 2011,
+					"AgreementIdentifier": "",
+					"AgreementEffectiveDate": "",
+					"AgreementUrl": ""
+				},
+				"InitialMargin": {
+					"Value": 201613.2
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:icma:xsd:ICMARepoNewTrade" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CdmNewTradeWorkflow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Workflow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WorkflowName" type="xs:string" />
+              <xs:element name="WorkflowStep">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="WorkflowStepName" type="xs:string" />
+                    <xs:element name="TransactionDate" type="xs:date" />
+                    <xs:element name="PurchaseDate" type="xs:date" />
+                    <xs:element name="RepurchaseDate" type="xs:date" />
+                    <xs:element name="TradeIdentifier">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="UTI" type="xs:unsignedShort" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="TradeType" type="xs:string" />
+                    <xs:element name="Seller">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="LEIName" type="xs:string" />
+                          <xs:element name="LEI" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Buyer">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="LEIName" type="xs:string" />
+                          <xs:element name="LEI" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="TermType" type="xs:string" />
+                    <xs:element name="RateType" type="xs:string" />
+                    <xs:element name="DayCount" type="xs:string" />
+                    <xs:element name="CollateralList">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Collateral">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Description" type="xs:string" />
+                                <xs:element name="ISIN" type="xs:string" />
+                                <xs:element name="Currency" type="xs:string" />
+                                <xs:element name="NominalPerUnitAmount" type="xs:unsignedShort" />
+                                <xs:element name="DayCount" type="xs:string" />
+                                <xs:element name="InterestRate" type="xs:decimal" />
+                                <xs:element name="InterestPaymentFrequency" type="xs:string" />
+                                <xs:element name="NominalAmount" type="xs:unsignedShort" />
+                                <xs:element name="CleanPrice" type="xs:decimal" />
+                                <xs:element name="AccruedInterestPrice" type="xs:decimal" />
+                                <xs:element name="AccruedInterestAmount" type="xs:decimal" />
+                                <xs:element name="DirtyPrice" type="xs:decimal" />
+                                <xs:element name="UnAdjustedSettlementValue" type="xs:decimal" />
+                                <xs:element name="Margin" type="xs:decimal" />
+                                <xs:element name="AdjustedSettlementValue" type="xs:decimal" />
+                                <xs:element name="Haircut" type="xs:unsignedByte" />
+                                <xs:element name="SettlementAmount" type="xs:decimal" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Loan">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="LoanAmount" type="xs:decimal" />
+                          <xs:element name="LoanCurrency" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="RepoRate">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="FixedRate">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Value" type="xs:decimal" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Floating">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="FloatingRateIndex" />
+                                <xs:element name="FloatingRateIndexFreq" />
+                                <xs:element name="FloatingRateIndexRate" />
+                                <xs:element name="FloatingRateIndexSpread" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="PurchasePrice" type="xs:decimal" />
+                    <xs:element name="ProjectedInterest" type="xs:decimal" />
+                    <xs:element name="RepurchasePrice" type="xs:decimal" />
+                    <xs:element name="Optionality">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="TerminationOnDemand" type="xs:string" />
+                          <xs:element name="NoticePeriod" type="xs:unsignedByte" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="DeliveryMethod" type="xs:string" />
+                    <xs:element name="Substitution">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Allowed" type="xs:string" />
+                          <xs:element name="NumberAllowed" type="xs:unsignedByte" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Agreement">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AgreementName" type="xs:string" />
+                          <xs:element name="AgreementIssuer" type="xs:string" />
+                          <xs:element name="AgreementGoverningLaw" type="xs:string" />
+                          <xs:element name="AgreementDate" type="xs:unsignedShort" />
+                          <xs:element name="AgreementVersion" type="xs:unsignedShort" />
+                          <xs:element name="AgreementIdentifier" />
+                          <xs:element name="AgreementEffectiveDate" />
+                          <xs:element name="AgreementUrl" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="InitialMargin">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Value" type="xs:decimal" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

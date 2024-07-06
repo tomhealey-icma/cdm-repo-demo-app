@@ -2,11 +2,16 @@ package com.finxis.cdm.crossproductapp.ui;
 
 import com.finxis.cdm.crossproductapp.*;
 import com.finxis.cdm.crossproductapp.util.IcmaRepoUtil;
+import com.finxis.cdm.crossproductapp.util.*;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -37,6 +42,8 @@ public class ActionPanel extends JPanel implements Observer {
 
     public JButton newTradeBtn;
     public JButton bookTradeBtn;
+
+    public JButton chooseFileBtn;
 
     public JPanel actionPanel;
 
@@ -101,8 +108,13 @@ public class ActionPanel extends JPanel implements Observer {
 
         bookTradeBtn = new JButton("Book Trade");
         addActionListener(new ActionPanelListener() , bookTradeBtn);
-        newTradeBtn.setPreferredSize(new Dimension(btnWidth, btnHeight));
+        bookTradeBtn.setPreferredSize(new Dimension(btnWidth, btnHeight));
         actionBtnPanel.add(bookTradeBtn);
+
+        chooseFileBtn = new JButton("Select File");
+        addActionListener(new ActionPanelListener() , chooseFileBtn);
+        chooseFileBtn.setPreferredSize(new Dimension(btnWidth, btnHeight));
+        actionBtnPanel.add(chooseFileBtn);
 
 
         actionBtnPanel.setVisible(true);
@@ -166,7 +178,66 @@ public class ActionPanel extends JPanel implements Observer {
                     throw new RuntimeException(e);
                 }
 
+            }  else if (ae.getSource() == chooseFileBtn) {
+            JOptionPane.showMessageDialog(tep, "Select File", "Alert", JOptionPane.INFORMATION_MESSAGE);
+
+            JFileChooser fc  = new JFileChooser();
+            File cd = new File("./upload");
+            fc.setCurrentDirectory(cd);
+            int returnVal = fc.showDialog(tep, "Attach");
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+                File loadFile = fc.getSelectedFile();
+                String name = loadFile.getName();
+                int lastIndexOf = name.lastIndexOf(".");
+                if (lastIndexOf == -1) {
+                    JOptionPane.showMessageDialog(tep, "Select File", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                }
+                String fileType = name.substring(lastIndexOf);
+                //This is where a real application would open the file.
+                System.out.println("Opening: " + loadFile.getName());
+                //Convert XML file to object
+
+                if(fileType.equals(".xml")) {
+                    LoadXmlNewTrade lxml = new LoadXmlNewTrade();
+                    lxml.createNewTradeFromXML(loadFile);
+                }else if (fileType.equals(".json")){
+                    LoadXmlNewTrade lxml = new LoadXmlNewTrade();
+                    Document xmlDoc= null;
+                    try {
+                        xmlDoc= new LoadJsonNewTrade().convertJsontoXml(loadFile);
+                    } catch (ParserConfigurationException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        lxml.createNewTradeFromXMLDoc(xmlDoc);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (ParserConfigurationException e) {
+                        throw new RuntimeException(e);
+                    } catch (SAXException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else if (fileType.equals(".csv")){
+                    LoadCsvNewTrade lcsv = new LoadCsvNewTrade();
+                    try {
+                        lcsv.createNewTradeFromCsv1(loadFile);
+                        lcsv.createNewTradeFromCsv2(loadFile);
+                    } catch (ParserConfigurationException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (SAXException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }else{
+                    JOptionPane.showMessageDialog(tep, "Cannot load file type " + fileType , "Alert", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+
             }
+        }
         }
 
     }

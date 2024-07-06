@@ -52,6 +52,7 @@ import cdm.product.common.schedule.RateSchedule;
 import cdm.product.common.settlement.*;
 import cdm.product.template.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.finxis.cdm.crossproductapp.util.CdmUtil;
 import com.finxis.cdm.crossproductapp.util.IcmaRepoUtil;
 import com.regnosys.rosetta.common.hashing.GlobalKeyProcessStep;
 import com.regnosys.rosetta.common.hashing.NonNullHashCollector;
@@ -182,16 +183,17 @@ public class RepoExecutionCreation{
 		RepoExecutionCreation rc = new RepoExecutionCreation();
 
 		DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
-		ZonedDateTime zdtWithZoneOffset = ZonedDateTime.parse(tradeDateStr, formatter);
+
+		String dateTemp = tradeDateStr;
+		dateTemp = dateTemp.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+		ZonedDateTime zdtWithZoneOffset = ZonedDateTime.parse(dateTemp, formatter);
 		ZonedDateTime zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
-		//System.out.println("Trade Date:" + zdtWithZoneOffset);
-		//System.out.println(zdtInLocalTimeline);
 
 		IcmaRepoUtil ru = new IcmaRepoUtil();
+		CdmUtil cdmUtil = new CdmUtil();
 
-		FieldWithMetaDate tradeDate = addGlobalKey(FieldWithMetaDate.class,
-						ru.createTradeDate(zdtWithZoneOffset.getYear(), zdtWithZoneOffset.getMonthValue(), zdtWithZoneOffset.getDayOfMonth()));
-		
+		FieldWithMetaDate tradeDate = cdmUtil.createCdmDateFromShortDateString(tradeDateStr);
+
 		TradeIdentifier tradeIdentifier = ru.createRepoTradeIdentifier(tradeUTIStr, "UnqTradIdr", "5493000SCC07UI6DB380");
 		TradeIdentifier firmTradeIdentifer = ru.createRepoTradeIdentifier(firmTradeIdStr, "UnqTradIdr", sellerLEIStr);
 
@@ -278,16 +280,19 @@ public class RepoExecutionCreation{
 				createCollateralPriceQuantity(cashCurrencyStr, cashQuantity, collateralCurrencyStr, collateralQuantity, collateralCleanPrice, collateralDirtyPrice, repoRate,collateralISINStr,""));
 		
 		List<PriceQuantity> repoPriceQuantityList = List.of(repoPriceQuantity, collateralPriceQuantity);
-	
+
+		purchaseDateStr = purchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
 		zdtWithZoneOffset = ZonedDateTime.parse(purchaseDateStr, formatter);
 		zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
+
 		Date effectiveDate = of(zdtWithZoneOffset.getYear(), zdtWithZoneOffset.getMonthValue(), zdtWithZoneOffset.getDayOfMonth());
 
 		//System.out.println("Purchase Date:" + zdtWithZoneOffset);
 
 		Date terminationDate = null; //An open repo has a null termination date
 
-		if(termTypeStr.equals("FIXED")) {
+		if(termTypeStr.equals("FIXED") || termTypeStr.equals("TERM")) {
+			repurchaseDateStr = repurchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
 			zdtWithZoneOffset = ZonedDateTime.parse(repurchaseDateStr, formatter);
 			zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
 			terminationDate = of(zdtWithZoneOffset.getYear(), zdtWithZoneOffset.getMonthValue(), zdtWithZoneOffset.getDayOfMonth());
@@ -301,10 +306,13 @@ public class RepoExecutionCreation{
 
 		String execType;
 
-		if(execVenueCode.equals("OTC"))
+		if (execVenueCode != null ) {
+			if (execVenueCode.equals("OTC"))
+				execType = "OFF_FACILITY";
+			else
+				execType = "ON_VENUE";
+		} else
 			execType = "OFF_FACILITY";
-		else
-			execType = "ON_VENUE";
 
 		String execVenueName = ""; //Possibility to add lookup based on code;
 		ExecutionDetails executionDetails = createRepoExecutionDetails(execType,execVenueCode, execVenueScheme,execVenueName);
@@ -450,7 +458,13 @@ public class RepoExecutionCreation{
 
 		EconomicTerms ecterms = null;
 
-		BusinessCenterEnum businessCenterEnum = BusinessCenterEnum.valueOf(businessCenter);
+		BusinessCenterEnum businessCenterEnum = null;
+
+		if (businessCenter == null )
+			businessCenterEnum = BusinessCenterEnum.GBLO;
+		else
+			businessCenterEnum = BusinessCenterEnum.valueOf(businessCenter);
+
 
 		ProductIdentifier collateralId = ProductIdentifier.builder()
 				.setIdentifier(FieldWithMetaString.builder()
@@ -611,7 +625,7 @@ public class RepoExecutionCreation{
 			AdjustableOrRelativeDate effectiveDate){
 
 		return List.of(AssetLeg.builder()
-				.setDeliveryMethod(DeliveryMethodEnum.valueOf(deliveryMethod))
+				.setDeliveryMethod(DeliveryMethodEnum.DELIVERY_VERSUS_PAYMENT)
 				.setSettlementDate(AdjustableOrRelativeDate.builder()
 						.setRelativeDate(AdjustedRelativeDateOffset.builder()
 								.setPeriod(PeriodEnum.D)
@@ -648,6 +662,9 @@ public class RepoExecutionCreation{
 
 
 			IcmaRepoUtil ru = new IcmaRepoUtil();
+
+			if(deliveryMethodStr.equals("DVP"))
+				deliveryMethodStr = "DeliveryVersusPayment";
 
         	return InterestRatePayout.builder()
                 .setPriceQuantity(createResolveableLoanPriceQuantity(
@@ -724,7 +741,7 @@ public class RepoExecutionCreation{
 						.addCashSettlementTerms(CashSettlementTerms.builder()
 								.setCashSettlementMethod(CashSettlementMethodEnum.CASH_PRICE_METHOD))
 						.setSettlementType(SettlementTypeEnum.CASH)
-						.setTransferSettlementType(TransferSettlementEnum.valueOf(deliveryMethodStr))
+						.setTransferSettlementType(TransferSettlementEnum.DELIVERY_VERSUS_PAYMENT)
 						.setSettlementCurrency(FieldWithMetaString.builder()
 								.setValue(cashCurrency)
 								.setMeta(MetaFields.builder()

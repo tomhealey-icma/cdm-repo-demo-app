@@ -141,4 +141,79 @@ public class CdmUtil {
                 .setIdentifierType(TradeIdentifierTypeEnum.valueOf("UNIQUE_TRANSACTION_IDENTIFIER"))
                 .build();
     }
+
+    public FieldWithMetaDate createCdmDateFromLongDateString(String dateStr){
+
+        IcmaRepoUtil ru = new IcmaRepoUtil();
+
+        DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
+        ZonedDateTime zdtWithZoneOffset = ZonedDateTime.parse(dateStr, formatter);
+
+        FieldWithMetaDate cdmDate = addGlobalKey(FieldWithMetaDate.class,
+                ru.createTradeDate(zdtWithZoneOffset.getYear(), zdtWithZoneOffset.getMonthValue(), zdtWithZoneOffset.getDayOfMonth()));
+
+        return cdmDate;
+
+    }
+
+    public FieldWithMetaDate createCdmDateFromShortDateString(String dateStr){
+
+        IcmaRepoUtil ru = new IcmaRepoUtil();
+
+        String tradeDateStr = dateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+        DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
+        ZonedDateTime zdtWithZoneOffset = ZonedDateTime.parse(tradeDateStr, formatter);
+
+        FieldWithMetaDate cdmDate = addGlobalKey(FieldWithMetaDate.class,
+                ru.createTradeDate(zdtWithZoneOffset.getYear(), zdtWithZoneOffset.getMonthValue(), zdtWithZoneOffset.getDayOfMonth()));
+
+        return cdmDate;
+
+    }
+
+    public Party createRepoParty(String partyId, String scheme, String pName) {
+
+        Party party;
+
+        if ((partyId.equals("")) && (pName.equals("")))
+            party = null;
+        else{
+            party = addGlobalKey(Party.class,
+                    Party.builder()
+                            .addPartyId(PartyIdentifier.builder()
+                                    .setIdentifierValue(partyId)
+                                    .setMeta(MetaFields.builder()
+                                            .setScheme(scheme).build())
+                                    .build())
+                            .setNameValue(pName)
+                            .build());
+        }
+        return party;
+    }
+
+    public PartyRole createRepoPartyRole(Party party, String reference, String role) {
+
+        PartyRole partyRole;
+
+        if (party == null )
+            partyRole = null;
+        else {
+            partyRole = PartyRole.builder()
+                    .setPartyReference(ReferenceWithMetaParty.builder()
+                            .setGlobalReference(getGlobalReference(party))
+                            .setExternalReference(reference)
+                            .build())
+                    .setRole(PartyRoleEnum.valueOf(role))
+                    .build();
+        }
+        return partyRole;
+    }
+
+    public Counterparty createRepoCounterparty(Party party, String role) {
+
+        return Counterparty.builder()
+                .setPartyReferenceValue(party)
+                .setRole(CounterpartyRoleEnum.valueOf(role))
+                .build();
+    }
 }
