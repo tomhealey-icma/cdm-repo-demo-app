@@ -34,6 +34,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.*;
 
 
@@ -60,7 +61,7 @@ public class LoadCsvNewTrade {
     private String getGlobalReference(GlobalKey globalKey) {
         return globalKey.getMeta().getGlobalKey();
     }
-    public WorkflowStep createNewTradeFromCsv1(File csvFile) throws ParserConfigurationException, IOException, SAXException {
+    public WorkflowStep createNewTradeFromCsv1(File csvFile) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
         WorkflowStep workflowStep = WorkflowStep.builder();
 

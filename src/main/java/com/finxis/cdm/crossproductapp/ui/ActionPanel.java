@@ -1,14 +1,19 @@
 package com.finxis.cdm.crossproductapp.ui;
 
+import cdm.event.common.BusinessEvent;
+import cdm.event.workflow.WorkflowStep;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.finxis.cdm.crossproductapp.*;
 import com.finxis.cdm.crossproductapp.util.IcmaRepoUtil;
 import com.finxis.cdm.crossproductapp.util.*;
+import com.regnosys.rosetta.common.serialisation.RosettaObjectMapper;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -139,7 +144,7 @@ public class ActionPanel extends JPanel implements Observer {
 
             BookTrade bt = new BookTrade();
             RepoLifeCycle rlc = new RepoLifeCycle();
-
+            IcmaRepoUtil ru = new IcmaRepoUtil();
 
             if (ae.getSource() == newTradeBtn) {
                 JOptionPane.showMessageDialog(tep, "Create New Trade", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -158,7 +163,7 @@ public class ActionPanel extends JPanel implements Observer {
                     tep.statusField.setText("EXECUTED");
                     System.out.println(businessEvent);
 
-                    IcmaRepoUtil ru = new IcmaRepoUtil();
+
                     tep.tradeStateStr = ru.getAfterTradeState(businessEvent);
                     tep.afterTradeStateStr = tep.tradeStateStr;
 
@@ -184,6 +189,9 @@ public class ActionPanel extends JPanel implements Observer {
             JFileChooser fc  = new JFileChooser();
             File cd = new File("./upload");
             fc.setCurrentDirectory(cd);
+
+            WorkflowStep wfs = WorkflowStep.builder();
+
             int returnVal = fc.showDialog(tep, "Attach");
             if (returnVal == JFileChooser.APPROVE_OPTION) {
 
@@ -200,28 +208,18 @@ public class ActionPanel extends JPanel implements Observer {
 
                 if(fileType.equals(".xml")) {
                     LoadXmlNewTrade lxml = new LoadXmlNewTrade();
-                    lxml.createNewTradeFromXML(loadFile);
+                    wfs = lxml.createNewTradeFromXML(loadFile);
                 }else if (fileType.equals(".json")){
-                    LoadXmlNewTrade lxml = new LoadXmlNewTrade();
-                    Document xmlDoc= null;
+                    LoadJsonNewTrade ljson = new LoadJsonNewTrade();
                     try {
-                        xmlDoc= new LoadJsonNewTrade().convertJsontoXml(loadFile);
+                        wfs = ljson.createNewTradeFromJsontoXml(loadFile);
                     } catch (ParserConfigurationException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
-                        lxml.createNewTradeFromXMLDoc(xmlDoc);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (ParserConfigurationException e) {
-                        throw new RuntimeException(e);
-                    } catch (SAXException e) {
                         throw new RuntimeException(e);
                     }
                 }else if (fileType.equals(".csv")){
                     LoadCsvNewTrade lcsv = new LoadCsvNewTrade();
                     try {
-                        lcsv.createNewTradeFromCsv1(loadFile);
+                        wfs = lcsv.createNewTradeFromCsv1(loadFile);
                         lcsv.createNewTradeFromCsv2(loadFile);
                     } catch (ParserConfigurationException e) {
                         throw new RuntimeException(e);
@@ -229,12 +227,38 @@ public class ActionPanel extends JPanel implements Observer {
                         throw new RuntimeException(e);
                     } catch (SAXException e) {
                         throw new RuntimeException(e);
+                    } catch (TransformerException e) {
+                        throw new RuntimeException(e);
                     }
 
                 }else{
                     JOptionPane.showMessageDialog(tep, "Cannot load file type " + fileType , "Alert", JOptionPane.INFORMATION_MESSAGE);
 
                 }
+
+
+                String businessEvent = null;
+                try {
+                    businessEvent = RosettaObjectMapper.getNewRosettaObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(wfs.getBusinessEvent());
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+                DateTimeFormatter eventDateFormat = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+                LocalDateTime localDateTime = LocalDateTime.now();
+                String eventDateTime = localDateTime.format(eventDateFormat);
+
+                try {
+                    ru.writeEventToFile("execution-business-event", eventDateTime, businessEvent);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    tradeTableModel.addTrade(businessEvent);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+
 
             }
         }

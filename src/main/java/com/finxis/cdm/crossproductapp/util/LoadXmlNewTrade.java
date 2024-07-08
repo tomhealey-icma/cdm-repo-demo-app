@@ -24,6 +24,7 @@ import com.rosetta.model.metafields.FieldWithMetaDate;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import org.apache.commons.io.FileUtils;
 import org.finos.cdm.CdmRuntimeModule;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -33,12 +34,11 @@ import javax.sql.rowset.spi.XmlReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -91,12 +91,9 @@ public class LoadXmlNewTrade {
     public WorkflowStep createNewTradeFromXML(File xmlFile) {
 
 
-        com.finxis.cdm.crossproductapp.util.XmlReader xmlReader = new com.finxis.cdm.crossproductapp.util.XmlReader();
-
         WorkflowStep workflowStep = WorkflowStep.builder();
 
         try {
-            Document doc = xmlReader.readXmlFile(xmlFile);
 
             JAXBContext jaxbContext;
 
@@ -110,18 +107,9 @@ public class LoadXmlNewTrade {
                 e.printStackTrace();
             }
 
-            //NamedNodeMap nmap = xmlReader.getElement(doc);
-            //List<Party> party = xmlReader.getPartyElements(doc);
-
-            //RosettaModelObject o = xmlReader.mapXmlToCDMObject(doc);
-
             System.out.println("Processing XML File Complete.");
         } catch (
                 IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
             throw new RuntimeException(e);
         }
 
@@ -155,12 +143,6 @@ public class LoadXmlNewTrade {
                 e.printStackTrace();
             }
 
-            //NamedNodeMap nmap = xmlReader.getElement(doc);
-
-            //List<Party> party = xmlReader.getPartyElements(doc);
-
-            //RosettaModelObject o = xmlReader.mapXmlToCDMObject(doc);
-
             System.out.println("Processing XML File Complete.");
         } catch (
                 IOException e) {
@@ -170,40 +152,35 @@ public class LoadXmlNewTrade {
         return workflowStep;
     }
 
-    public WorkflowStep createNewTradeFromXMLDoc(Document doc) throws IOException, ParserConfigurationException, SAXException {
+    public WorkflowStep createNewTradeFromXMLDoc(Document doc) throws IOException, ParserConfigurationException, SAXException, TransformerException {
 
-
-        com.finxis.cdm.crossproductapp.util.XmlReader xmlReader = new com.finxis.cdm.crossproductapp.util.XmlReader();
 
         WorkflowStep workflowStep = WorkflowStep.builder();
 
-        Document rdoc = xmlReader.readXmlFile(new File("cdmTrade.xml"));
+        DocumentToFile documentToFile = new DocumentToFile();
+        documentToFile.writeWc3DocumentToFile(doc);
+        String xmlString = documentToFile.writeWc3DocumentToString(doc);
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(false);
+        DocumentBuilder builder = dbf.newDocumentBuilder();
+
+        //String xmlString = FileUtils.readFileToString(new File("cdmTrade2.xml"), StandardCharsets.UTF_8);
+        Reader xmlDoc = new StringReader(xmlString);
 
         try {
-            //DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            //Document doc = db.parse(new ByteArrayInputStream(xmlStr.getBytes("UTF-8")));
-            //InputSource is = new InputSource();
-            //is.setCharacterStream(new StringReader(xmlStr));
-
-            //Document doc = db.parse(is);
 
             JAXBContext jaxbContext;
 
             try {
                 jaxbContext = JAXBContext.newInstance(CdmNewTradeWorkflow.class);
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                CdmNewTradeWorkflow cdmNewTradeWorkflow = (CdmNewTradeWorkflow) jaxbUnmarshaller.unmarshal(new File("cdmTrade.xml"));
+                CdmNewTradeWorkflow cdmNewTradeWorkflow = (CdmNewTradeWorkflow) jaxbUnmarshaller.unmarshal(xmlDoc);
                 workflowStep = createNewTrade(cdmNewTradeWorkflow );
                 System.out.println(cdmNewTradeWorkflow);
             } catch (JAXBException e) {
                 e.printStackTrace();
             }
-
-            //NamedNodeMap nmap = xmlReader.getElement(doc);
-
-            //List<Party> party = xmlReader.getPartyElements(doc);
-
-            //RosettaModelObject o = xmlReader.mapXmlToCDMObject(doc);
 
             System.out.println("Processing XML File Complete.");
         } catch (
@@ -324,6 +301,7 @@ public class LoadXmlNewTrade {
 
         BusinessEvent businessEvent = BusinessEvent.builder()
                 .addInstruction(instruction)
+                .setAfter(List.of(tradeState))
                 .build();
 
         FileWriter fileWriter = new FileWriter();
