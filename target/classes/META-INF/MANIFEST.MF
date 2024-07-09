@@ -1,1 +1,1 @@
-Main-Class: com.finxis.cdm.trainingapp.CdmTradingDemo
+Main-Class: com.finxis.cdm.crossproductapp.CdmTradingDemo
