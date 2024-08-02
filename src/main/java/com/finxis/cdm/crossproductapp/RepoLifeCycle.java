@@ -71,6 +71,8 @@ import com.rosetta.model.metafields.FieldWithMetaString;
 import com.rosetta.model.metafields.MetaFields;
 import org.finos.cdm.CdmRuntimeModule;
 import com.finxis.cdm.crossproductapp.workflows.executionworkflow.*;
+import com.finxis.util.FileWriter;
+
 
 import javax.swing.*;
 import java.io.IOException;
@@ -273,7 +275,10 @@ public class RepoLifeCycle {
 
 		//Output used for CDM Test Case
 		String icmarepoexecutionfuncinputJson = RosettaObjectMapper.getNewRosettaObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(betest);
-		ru.writeEventToFile("icma-repo-execution-func-input", eventDateTime, icmarepoexecutionfuncinputJson);
+		//ru.writeEventToFile("icma-repo-execution-func-input", eventDateTime, icmarepoexecutionfuncinputJson);
+		FileWriter fileWriter = new FileWriter();
+		fileWriter.writeEventToFile("icma-repo-execution-func-input", eventDateTime, icmarepoexecutionfuncinputJson);
+
 		//End output for CDM Test Case
 
 		Create_BusinessEvent rx= new Create_BusinessEvent.Create_BusinessEventDefault();
@@ -306,6 +311,7 @@ public class RepoLifeCycle {
 		List<Party> parties = List.of(party1, party2);
 
 		DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
+		tradeDateStr = tradeDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
 		ZonedDateTime zdtWithZoneOffset = ZonedDateTime.parse(tradeDateStr, formatter);
 		ZonedDateTime zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
 		EventTimestamp eventTimestamp = new EventTimestamp.EventTimestampBuilderImpl()

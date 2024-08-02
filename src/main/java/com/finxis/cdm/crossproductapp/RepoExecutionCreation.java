@@ -54,6 +54,7 @@ import cdm.product.template.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.finxis.cdm.crossproductapp.util.CdmUtil;
 import com.finxis.cdm.crossproductapp.util.IcmaRepoUtil;
+import com.finxis.util.FINXISDateTime;
 import com.regnosys.rosetta.common.hashing.GlobalKeyProcessStep;
 import com.regnosys.rosetta.common.hashing.NonNullHashCollector;
 import com.rosetta.model.lib.GlobalKey;
@@ -185,7 +186,12 @@ public class RepoExecutionCreation{
 		DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
 
 		String dateTemp = tradeDateStr;
-		dateTemp = dateTemp.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+		FINXISDateTime finxisDateTime = new FINXISDateTime();
+		finxisDateTime.createFINXISDateTime(dateTemp);
+		dateTemp  = finxisDateTime.getReferenceDateTime().longDateTime;
+
+
+		//dateTemp = dateTemp.replaceAll("\\s", "") + "T00:00:00.000+00:00";
 		ZonedDateTime zdtWithZoneOffset = ZonedDateTime.parse(dateTemp, formatter);
 		ZonedDateTime zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
 
@@ -281,7 +287,11 @@ public class RepoExecutionCreation{
 		
 		List<PriceQuantity> repoPriceQuantityList = List.of(repoPriceQuantity, collateralPriceQuantity);
 
-		purchaseDateStr = purchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+		//purchaseDateStr = purchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+
+		finxisDateTime.createFINXISDateTime(purchaseDateStr);
+		purchaseDateStr = finxisDateTime.getReferenceDateTime().longDateTime;
+
 		zdtWithZoneOffset = ZonedDateTime.parse(purchaseDateStr, formatter);
 		zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
 
@@ -292,7 +302,11 @@ public class RepoExecutionCreation{
 		Date terminationDate = null; //An open repo has a null termination date
 
 		if(termTypeStr.equals("FIXED") || termTypeStr.equals("TERM")) {
-			repurchaseDateStr = repurchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+
+			//repurchaseDateStr = repurchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+
+			finxisDateTime.createFINXISDateTime(repurchaseDateStr );
+			repurchaseDateStr  = finxisDateTime.getReferenceDateTime().longDateTime;
 			zdtWithZoneOffset = ZonedDateTime.parse(repurchaseDateStr, formatter);
 			zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());
 			terminationDate = of(zdtWithZoneOffset.getYear(), zdtWithZoneOffset.getMonthValue(), zdtWithZoneOffset.getDayOfMonth());

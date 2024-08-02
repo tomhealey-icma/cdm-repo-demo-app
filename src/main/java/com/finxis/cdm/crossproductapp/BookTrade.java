@@ -32,13 +32,13 @@ public class BookTrade {
         String transactionTypeStr = tep.cdmMap.get(tep.transactionTypeField.getSelectedItem().toString());
 
         String tdt = tep.tradeDateField.getText();
-        String tradeDateStr = tdt.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+        String tradeDateStr = tdt.replaceAll("\\s", "");
 
         String pdt = tep.purchaseDateField.getText();
-        String purchaseDateStr = pdt.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+        String purchaseDateStr = pdt.replaceAll("\\s", "");
 
         String rdt = tep.repurchaseDateField.getText();
-        String repurchaseDateStr = rdt.replaceAll("\\s", "") + "T00:00:00.000+00:00";
+        String repurchaseDateStr = rdt.replaceAll("\\s", "");
 
         String tradeUTIStr = tep.tradeUTIField.getText();
 
