@@ -54,7 +54,7 @@ import cdm.product.template.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.finxis.cdm.crossproductapp.util.CdmUtil;
 import com.finxis.cdm.crossproductapp.util.IcmaRepoUtil;
-import com.finxis.util.FINXISDateTime;
+import com.finxis.cdm.crossproductapp.util.FinxisDateTime;
 import com.regnosys.rosetta.common.hashing.GlobalKeyProcessStep;
 import com.regnosys.rosetta.common.hashing.NonNullHashCollector;
 import com.rosetta.model.lib.GlobalKey;
@@ -186,8 +186,8 @@ public class RepoExecutionCreation{
 		DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
 
 		String dateTemp = tradeDateStr;
-		FINXISDateTime finxisDateTime = new FINXISDateTime();
-		finxisDateTime.createFINXISDateTime(dateTemp);
+		FinxisDateTime finxisDateTime = new FinxisDateTime();
+		finxisDateTime.createFinxisDateTime(dateTemp);
 		dateTemp  = finxisDateTime.getReferenceDateTime().longDateTime;
 
 
@@ -289,7 +289,7 @@ public class RepoExecutionCreation{
 
 		//purchaseDateStr = purchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
 
-		finxisDateTime.createFINXISDateTime(purchaseDateStr);
+		finxisDateTime.createFinxisDateTime(purchaseDateStr);
 		purchaseDateStr = finxisDateTime.getReferenceDateTime().longDateTime;
 
 		zdtWithZoneOffset = ZonedDateTime.parse(purchaseDateStr, formatter);
@@ -305,7 +305,7 @@ public class RepoExecutionCreation{
 
 			//repurchaseDateStr = repurchaseDateStr.replaceAll("\\s", "") + "T00:00:00.000+00:00";
 
-			finxisDateTime.createFINXISDateTime(repurchaseDateStr );
+			finxisDateTime.createFinxisDateTime(repurchaseDateStr );
 			repurchaseDateStr  = finxisDateTime.getReferenceDateTime().longDateTime;
 			zdtWithZoneOffset = ZonedDateTime.parse(repurchaseDateStr, formatter);
 			zdtInLocalTimeline = zdtWithZoneOffset.withZoneSameInstant(ZoneId.systemDefault());

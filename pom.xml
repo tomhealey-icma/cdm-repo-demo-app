@@ -62,11 +62,6 @@
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
-        <dependency>
-            <groupId>com.finxis</groupId>
-            <artifactId>cdm-utilities-v1.0</artifactId>
-            <version>LATEST</version>
-        </dependency>
 
     </dependencies>
 

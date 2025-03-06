@@ -4,7 +4,7 @@ import cdm.base.datetime.BusinessCenterEnum;
 import cdm.base.datetime.BusinessCenters;
 import com.finxis.cdm.crossproductapp.ui.ActionPanel;
 import com.finxis.cdm.crossproductapp.ui.TradingFrame;
-import com.finxis.cdmutil.User;
+import com.finxis.cdm.crossproductapp.cdmutil.User;
 import com.rosetta.model.lib.process.PostProcessStep;
 import com.sun.jdi.Field;
 

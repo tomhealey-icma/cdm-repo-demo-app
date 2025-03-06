@@ -71,7 +71,7 @@ import com.rosetta.model.metafields.FieldWithMetaString;
 import com.rosetta.model.metafields.MetaFields;
 import org.finos.cdm.CdmRuntimeModule;
 import com.finxis.cdm.crossproductapp.workflows.executionworkflow.*;
-import com.finxis.util.FileWriter;
+import com.finxis.cdm.crossproductapp.util.FileWriter;
 
 
 import javax.swing.*;
