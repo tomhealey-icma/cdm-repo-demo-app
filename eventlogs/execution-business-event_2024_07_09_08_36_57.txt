@@ -1,0 +1,1134 @@
+{
+	"instruction": [
+		{
+			"primitiveInstruction": {
+				"execution": {
+					"product": {
+						"contractualProduct": {
+							"productTaxonomy": [
+								{
+									"source": "CFI",
+									"value": {
+										"name": {
+											"value": "LRSTXD"
+										}
+									},
+									"primaryAssetClass": {
+										"value": "MoneyMarket"
+									}
+								}
+							],
+							"economicTerms": {
+								"effectiveDate": {
+									"adjustableDate": {
+										"unadjustedDate": "2024-01-18",
+										"dateAdjustments": {
+											"businessDayConvention": "NONE",
+											"businessCenters": {
+												"businessCenter": [
+													{
+														"value": "GBLO",
+														"meta": {}
+													}
+												]
+											}
+										}
+									},
+									"meta": {
+										"globalKey": "PurchaseDate",
+										"externalKey": "PurchaseDate"
+									}
+								},
+								"terminationDate": {
+									"adjustableDate": {
+										"unadjustedDate": "2024-01-19",
+										"dateAdjustments": {
+											"businessDayConvention": "NONE",
+											"meta": {
+												"globalKey": "RepurchaseDate",
+												"externalKey": "RepurchaseDate"
+											}
+										}
+									}
+								},
+								"payout": {
+									"interestRatePayout": [
+										{
+											"payerReceiver": {
+												"payer": "Party1",
+												"receiver": "Party2"
+											},
+											"priceQuantity": {
+												"resolvedQuantity": {
+													"value": 9879046.8,
+													"unit": {
+														"currency": {
+															"value": "GBP"
+														}
+													}
+												},
+												"quantitySchedule": {
+													"value": {
+														"value": 9879046.8,
+														"unit": {
+															"currency": {
+																"value": "GBP",
+																"meta": {}
+															}
+														}
+													}
+												},
+												"meta": {
+													"externalKey": "PurchasePrice"
+												}
+											},
+											"principalPayment": {
+												"initialPayment": true,
+												"finalPayment": true,
+												"intermediatePayment": false,
+												"principalPaymentSchedule": {
+													"initialPrincipalPayment": {
+														"principalAmount": {
+															"value": 9879046.8,
+															"unit": {
+																"currency": {
+																	"value": "GBP"
+																}
+															}
+														}
+													},
+													"finalPrincipalPayment": {
+														"principalAmount": {
+															"value": 9879155.06,
+															"unit": {
+																"currency": {
+																	"value": "GBP"
+																}
+															}
+														}
+													}
+												}
+											},
+											"settlementTerms": {
+												"settlementType": "Cash",
+												"transferSettlementType": "DeliveryVersusPayment",
+												"settlementCurrency": {
+													"value": "GBP",
+													"meta": {}
+												},
+												"settlementDate": {
+													"adjustableOrRelativeDate": {
+														"unadjustedDate": "2024-01-18",
+														"dateAdjustments": {
+															"businessDayConvention": "NONE"
+														}
+													}
+												},
+												"cashSettlementTerms": [
+													{
+														"cashSettlementMethod": "CashPriceMethod"
+													}
+												]
+											},
+											"rateSpecification": {
+												"fixedRate": {
+													"rateSchedule": {
+														"price": {
+															"address": {
+																"scope": "DOCUMENT",
+																"value": "price-1"
+															}
+														}
+													}
+												}
+											},
+											"dayCountFraction": {
+												"value": "30E/360"
+											},
+											"calculationPeriodDates": {
+												"effectiveDate": {
+													"adjustableDate": {
+														"unadjustedDate": "2024-01-18",
+														"dateAdjustments": {
+															"businessDayConvention": "NONE"
+														}
+													}
+												},
+												"terminationDate": {
+													"adjustableDate": {
+														"unadjustedDate": "2024-01-19",
+														"dateAdjustments": {
+															"businessDayConvention": "MODFOLLOWING",
+															"businessCenters": {
+																"businessCenter": [
+																	{
+																		"value": "EUTA"
+																	}
+																],
+																"businessCentersReference": {
+																	"externalReference": "primaryBusinessCenters"
+																}
+															}
+														}
+													}
+												},
+												"calculationPeriodDatesAdjustments": {
+													"businessDayConvention": "MODFOLLOWING",
+													"businessCenters": {
+														"businessCentersReference": {
+															"externalReference": "primaryBusinessCenters"
+														}
+													}
+												},
+												"calculationPeriodFrequency": {
+													"periodMultiplier": 3,
+													"period": "M",
+													"rollConvention": "3"
+												}
+											},
+											"paymentDates": {
+												"paymentFrequency": {
+													"periodMultiplier": 1,
+													"period": "Y"
+												},
+												"payRelativeTo": "CalculationPeriodEndDate"
+											}
+										}
+									],
+									"assetPayout": [
+										{
+											"payerReceiver": {
+												"payer": "Party1",
+												"receiver": "Party2"
+											},
+											"assetLeg": [
+												{
+													"settlementDate": {
+														"relativeDate": {
+															"periodMultiplier": 0,
+															"period": "D",
+															"businessDayConvention": "NONE",
+															"dateRelativeTo": {
+																"globalReference": "PurchaseDate",
+																"externalReference": "PurchaseDate"
+															}
+														}
+													},
+													"deliveryMethod": "DeliveryVersusPayment"
+												}
+											],
+											"securityInformation": {
+												"security": {
+													"productIdentifier": [
+														{
+															"value": {
+																"identifier": {
+																	"value": "GB00BD0PCK97",
+																	"meta": {
+																		"globalKey": "4b79d383"
+																	}
+																},
+																"source": "ISIN"
+															}
+														}
+													]
+												}
+											}
+										}
+									]
+								},
+								"collateral": {
+									"collateralPortfolio": [
+										{
+											"value": {
+												"collateralPosition": [
+													{
+														"product": {
+															"security": {
+																"productIdentifier": [
+																	{
+																		"value": {
+																			"identifier": {
+																				"value": "GB00BD0PCK97",
+																				"meta": {
+																					"globalKey": "4b79d383"
+																				}
+																			},
+																			"source": "ISIN"
+																		}
+																	}
+																]
+															}
+														},
+														"treatment": {
+															"valuationTreatment": {
+																"haircutPercentage": 2
+															}
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						}
+					},
+					"priceQuantity": [
+						{
+							"price": [
+								{
+									"value": {
+										"value": 0.4,
+										"unit": {
+											"currency": {
+												"value": "GBP"
+											}
+										},
+										"perUnitOf": {
+											"currency": {
+												"value": "GBP"
+											}
+										},
+										"priceType": "InterestRate"
+									},
+									"meta": {
+										"globalKey": "REPO_RATE"
+									}
+								}
+							],
+							"quantity": [
+								{
+									"value": {
+										"value": 9879046.8,
+										"unit": {
+											"currency": {
+												"value": "GBP"
+											}
+										}
+									},
+									"meta": {
+										"globalKey": "PURCHASE_PRICE"
+									}
+								},
+								{
+									"value": {
+										"value": 9879155.06,
+										"unit": {
+											"currency": {
+												"value": "GBP"
+											}
+										}
+									},
+									"meta": {
+										"globalKey": "REPURCHASE_PRICE"
+									}
+								},
+								{
+									"value": {
+										"value": 108.25999999977648,
+										"unit": {
+											"currency": {
+												"value": "GBP"
+											}
+										}
+									},
+									"meta": {
+										"globalKey": "REPO_INTEREST"
+									}
+								}
+							],
+							"meta": {
+								"globalKey": "3f404d6e"
+							}
+						},
+						{
+							"price": [
+								{
+									"value": {
+										"value": 100.8066,
+										"unit": {
+											"currency": {
+												"value": "GBP"
+											}
+										},
+										"perUnitOf": {
+											"currency": {
+												"value": "GBP"
+											}
+										},
+										"priceType": "AssetPrice",
+										"priceExpression": "PercentageOfNotional",
+										"composite": {
+											"baseValue": 100.75,
+											"operand": 0.05660000000000309,
+											"arithmeticOperator": "Add"
+										}
+									}
+								}
+							],
+							"quantity": [
+								{
+									"value": {
+										"value": 10000.0,
+										"unit": {
+											"currency": {
+												"value": "GBP"
+											}
+										}
+									}
+								}
+							],
+							"observable": {
+								"productIdentifier": [
+									{
+										"value": {
+											"identifier": {
+												"value": "GB00BD0PCK97"
+											},
+											"source": "ISIN",
+											"meta": {
+												"globalKey": "23e30cac"
+											}
+										},
+										"meta": {
+											"location": [
+												{
+													"scope": "DOCUMENT"
+												}
+											]
+										}
+									}
+								],
+								"meta": {
+									"globalKey": "23e30cac"
+								}
+							},
+							"meta": {
+								"globalKey": "8aabc3a9"
+							}
+						}
+					],
+					"counterparty": [
+						{
+							"role": "Party1",
+							"partyReference": {
+								"value": {
+									"partyId": [
+										{
+											"identifier": {
+												"value": "7245009UXRIGIRYOBR48"
+											},
+											"meta": {
+												"scheme": "LEI",
+												"globalKey": "7bc454c3"
+											}
+										}
+									],
+									"name": {
+										"value": "SL-BANK"
+									},
+									"meta": {
+										"globalKey": "46f0d533"
+									}
+								}
+							}
+						},
+						{
+							"role": "Party2",
+							"partyReference": {
+								"value": {
+									"partyId": [
+										{
+											"identifier": {
+												"value": "8IBZUGJ7JPLH368JE346"
+											},
+											"meta": {
+												"scheme": "LEI",
+												"globalKey": "ebea26ef"
+											}
+										}
+									],
+									"name": {
+										"value": "BY-BANK"
+									},
+									"meta": {
+										"globalKey": "d7cfdd21"
+									}
+								}
+							}
+						}
+					],
+					"parties": [
+						{
+							"partyId": [
+								{
+									"identifier": {
+										"value": "7245009UXRIGIRYOBR48"
+									},
+									"meta": {
+										"scheme": "LEI",
+										"globalKey": "7bc454c3"
+									}
+								}
+							],
+							"name": {
+								"value": "SL-BANK"
+							},
+							"meta": {
+								"globalKey": "46f0d533"
+							}
+						},
+						{
+							"partyId": [
+								{
+									"identifier": {
+										"value": "8IBZUGJ7JPLH368JE346"
+									},
+									"meta": {
+										"scheme": "LEI",
+										"globalKey": "ebea26ef"
+									}
+								}
+							],
+							"name": {
+								"value": "BY-BANK"
+							},
+							"meta": {
+								"globalKey": "d7cfdd21"
+							}
+						}
+					],
+					"partyRoles": [
+						{
+							"partyReference": {
+								"globalReference": "46f0d533",
+								"externalReference": "8IBZUGJ7JPLH368JE346"
+							},
+							"role": "Seller"
+						},
+						{
+							"partyReference": {
+								"globalReference": "d7cfdd21",
+								"externalReference": "7245009UXRIGIRYOBR48"
+							},
+							"role": "Buyer"
+						}
+					],
+					"executionDetails": {
+						"executionType": "OffFacility",
+						"executionVenue": {
+							"entityId": [
+								{
+									"meta": {}
+								}
+							],
+							"name": {
+								"meta": {}
+							}
+						}
+					},
+					"tradeDate": {
+						"value": "2024-01-18"
+					},
+					"tradeIdentifier": [
+						{
+							"issuer": {
+								"value": "5493000SCC07UI6DB380"
+							},
+							"assignedIdentifier": [
+								{
+									"identifier": {
+										"value": "com.finxis.cdm.crossproductapp.util.CdmNewTradeWorkflow$Workflow$WorkflowStep$TradeIdentifier@4b2edce4",
+										"meta": {
+											"scheme": "UnqTradIdr"
+										}
+									}
+								}
+							],
+							"identifierType": "UniqueTransactionIdentifier"
+						},
+						{
+							"issuer": {
+								"value": "7245009UXRIGIRYOBR48"
+							},
+							"assignedIdentifier": [
+								{
+									"identifier": {
+										"value": "com.finxis.cdm.crossproductapp.util.CdmNewTradeWorkflow$Workflow$WorkflowStep$TradeIdentifier@4b2edce4",
+										"meta": {
+											"scheme": "UnqTradIdr"
+										}
+									}
+								}
+							],
+							"identifierType": "UniqueTransactionIdentifier"
+						}
+					]
+				}
+			}
+		}
+	],
+	"after": [
+		{
+			"trade": {
+				"tradeIdentifier": [
+					{
+						"issuer": {
+							"value": "5493000SCC07UI6DB380"
+						},
+						"assignedIdentifier": [
+							{
+								"identifier": {
+									"value": "com.finxis.cdm.crossproductapp.util.CdmNewTradeWorkflow$Workflow$WorkflowStep$TradeIdentifier@4b2edce4",
+									"meta": {
+										"scheme": "UnqTradIdr"
+									}
+								}
+							}
+						],
+						"identifierType": "UniqueTransactionIdentifier"
+					},
+					{
+						"issuer": {
+							"value": "7245009UXRIGIRYOBR48"
+						},
+						"assignedIdentifier": [
+							{
+								"identifier": {
+									"value": "com.finxis.cdm.crossproductapp.util.CdmNewTradeWorkflow$Workflow$WorkflowStep$TradeIdentifier@4b2edce4",
+									"meta": {
+										"scheme": "UnqTradIdr"
+									}
+								}
+							}
+						],
+						"identifierType": "UniqueTransactionIdentifier"
+					}
+				],
+				"tradeDate": {
+					"value": "2024-01-18"
+				},
+				"tradableProduct": {
+					"product": {
+						"contractualProduct": {
+							"productTaxonomy": [
+								{
+									"source": "CFI",
+									"value": {
+										"name": {
+											"value": "LRSTXD"
+										}
+									},
+									"primaryAssetClass": {
+										"value": "MoneyMarket"
+									}
+								}
+							],
+							"economicTerms": {
+								"effectiveDate": {
+									"adjustableDate": {
+										"unadjustedDate": "2024-01-18",
+										"dateAdjustments": {
+											"businessDayConvention": "NONE",
+											"businessCenters": {
+												"businessCenter": [
+													{
+														"value": "GBLO"
+													}
+												]
+											}
+										}
+									},
+									"meta": {
+										"globalKey": "PurchaseDate",
+										"externalKey": "PurchaseDate"
+									}
+								},
+								"terminationDate": {
+									"adjustableDate": {
+										"unadjustedDate": "2024-01-19",
+										"dateAdjustments": {
+											"businessDayConvention": "NONE",
+											"meta": {
+												"globalKey": "RepurchaseDate",
+												"externalKey": "RepurchaseDate"
+											}
+										}
+									}
+								},
+								"payout": {
+									"interestRatePayout": [
+										{
+											"payerReceiver": {
+												"payer": "Party1",
+												"receiver": "Party2"
+											},
+											"priceQuantity": {
+												"resolvedQuantity": {
+													"value": 9879046.8,
+													"unit": {
+														"currency": {
+															"value": "GBP"
+														}
+													}
+												},
+												"quantitySchedule": {
+													"value": {
+														"value": 9879046.8,
+														"unit": {
+															"currency": {
+																"value": "GBP",
+																"meta": {}
+															}
+														}
+													}
+												},
+												"meta": {
+													"externalKey": "PurchasePrice"
+												}
+											},
+											"principalPayment": {
+												"initialPayment": true,
+												"finalPayment": true,
+												"intermediatePayment": false,
+												"principalPaymentSchedule": {
+													"initialPrincipalPayment": {
+														"principalAmount": {
+															"value": 9879046.8,
+															"unit": {
+																"currency": {
+																	"value": "GBP"
+																}
+															}
+														}
+													},
+													"finalPrincipalPayment": {
+														"principalAmount": {
+															"value": 9879155.06,
+															"unit": {
+																"currency": {
+																	"value": "GBP"
+																}
+															}
+														}
+													}
+												}
+											},
+											"settlementTerms": {
+												"settlementType": "Cash",
+												"transferSettlementType": "DeliveryVersusPayment",
+												"settlementCurrency": {
+													"value": "GBP",
+													"meta": {}
+												},
+												"settlementDate": {
+													"adjustableOrRelativeDate": {
+														"unadjustedDate": "2024-01-18",
+														"dateAdjustments": {
+															"businessDayConvention": "NONE"
+														}
+													}
+												},
+												"cashSettlementTerms": [
+													{
+														"cashSettlementMethod": "CashPriceMethod"
+													}
+												]
+											},
+											"rateSpecification": {
+												"fixedRate": {
+													"rateSchedule": {
+														"price": {
+															"address": {
+																"scope": "DOCUMENT",
+																"value": "price-1"
+															}
+														}
+													}
+												}
+											},
+											"dayCountFraction": {
+												"value": "30E/360"
+											},
+											"calculationPeriodDates": {
+												"effectiveDate": {
+													"adjustableDate": {
+														"unadjustedDate": "2024-01-18",
+														"dateAdjustments": {
+															"businessDayConvention": "NONE"
+														}
+													}
+												},
+												"terminationDate": {
+													"adjustableDate": {
+														"unadjustedDate": "2024-01-19",
+														"dateAdjustments": {
+															"businessDayConvention": "MODFOLLOWING",
+															"businessCenters": {
+																"businessCenter": [
+																	{
+																		"value": "EUTA"
+																	}
+																],
+																"businessCentersReference": {
+																	"externalReference": "primaryBusinessCenters"
+																}
+															}
+														}
+													}
+												},
+												"calculationPeriodDatesAdjustments": {
+													"businessDayConvention": "MODFOLLOWING",
+													"businessCenters": {
+														"businessCentersReference": {
+															"externalReference": "primaryBusinessCenters"
+														}
+													}
+												},
+												"calculationPeriodFrequency": {
+													"periodMultiplier": 3,
+													"period": "M",
+													"rollConvention": "3"
+												}
+											},
+											"paymentDates": {
+												"paymentFrequency": {
+													"periodMultiplier": 1,
+													"period": "Y"
+												},
+												"payRelativeTo": "CalculationPeriodEndDate"
+											}
+										}
+									],
+									"assetPayout": [
+										{
+											"payerReceiver": {
+												"payer": "Party1",
+												"receiver": "Party2"
+											},
+											"assetLeg": [
+												{
+													"settlementDate": {
+														"relativeDate": {
+															"periodMultiplier": 0,
+															"period": "D",
+															"businessDayConvention": "NONE",
+															"dateRelativeTo": {
+																"globalReference": "PurchaseDate",
+																"externalReference": "PurchaseDate"
+															}
+														}
+													},
+													"deliveryMethod": "DeliveryVersusPayment"
+												}
+											],
+											"securityInformation": {
+												"security": {
+													"productIdentifier": [
+														{
+															"value": {
+																"identifier": {
+																	"value": "GB00BD0PCK97",
+																	"meta": {
+																		"globalKey": "4b79d383"
+																	}
+																},
+																"source": "ISIN"
+															}
+														}
+													]
+												}
+											}
+										}
+									]
+								},
+								"collateral": {
+									"collateralPortfolio": [
+										{
+											"value": {
+												"collateralPosition": [
+													{
+														"product": {
+															"security": {
+																"productIdentifier": [
+																	{
+																		"value": {
+																			"identifier": {
+																				"value": "GB00BD0PCK97",
+																				"meta": {
+																					"globalKey": "4b79d383"
+																				}
+																			},
+																			"source": "ISIN"
+																		}
+																	}
+																]
+															}
+														},
+														"treatment": {
+															"valuationTreatment": {
+																"haircutPercentage": 2
+															}
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						}
+					},
+					"tradeLot": [
+						{
+							"priceQuantity": [
+								{
+									"price": [
+										{
+											"value": {
+												"value": 0.4,
+												"unit": {
+													"currency": {
+														"value": "GBP"
+													}
+												},
+												"perUnitOf": {
+													"currency": {
+														"value": "GBP"
+													}
+												},
+												"priceType": "InterestRate"
+											},
+											"meta": {
+												"globalKey": "REPO_RATE"
+											}
+										}
+									],
+									"quantity": [
+										{
+											"value": {
+												"value": 9879046.8,
+												"unit": {
+													"currency": {
+														"value": "GBP"
+													}
+												}
+											},
+											"meta": {
+												"globalKey": "PURCHASE_PRICE"
+											}
+										},
+										{
+											"value": {
+												"value": 9879155.06,
+												"unit": {
+													"currency": {
+														"value": "GBP"
+													}
+												}
+											},
+											"meta": {
+												"globalKey": "REPURCHASE_PRICE"
+											}
+										},
+										{
+											"value": {
+												"value": 108.25999999977648,
+												"unit": {
+													"currency": {
+														"value": "GBP"
+													}
+												}
+											},
+											"meta": {
+												"globalKey": "REPO_INTEREST"
+											}
+										}
+									],
+									"meta": {
+										"globalKey": "3f404d6e"
+									}
+								},
+								{
+									"price": [
+										{
+											"value": {
+												"value": 100.8066,
+												"unit": {
+													"currency": {
+														"value": "GBP"
+													}
+												},
+												"perUnitOf": {
+													"currency": {
+														"value": "GBP"
+													}
+												},
+												"priceType": "AssetPrice",
+												"priceExpression": "PercentageOfNotional",
+												"composite": {
+													"baseValue": 100.75,
+													"operand": 0.05660000000000309,
+													"arithmeticOperator": "Add"
+												}
+											}
+										}
+									],
+									"quantity": [
+										{
+											"value": {
+												"value": 10000.0,
+												"unit": {
+													"currency": {
+														"value": "GBP"
+													}
+												}
+											}
+										}
+									],
+									"observable": {
+										"productIdentifier": [
+											{
+												"value": {
+													"identifier": {
+														"value": "GB00BD0PCK97"
+													},
+													"source": "ISIN",
+													"meta": {
+														"globalKey": "23e30cac"
+													}
+												}
+											}
+										],
+										"meta": {
+											"globalKey": "23e30cac"
+										}
+									},
+									"meta": {
+										"globalKey": "8aabc3a9"
+									}
+								}
+							]
+						}
+					],
+					"counterparty": [
+						{
+							"role": "Party1",
+							"partyReference": {
+								"value": {
+									"partyId": [
+										{
+											"identifier": {
+												"value": "7245009UXRIGIRYOBR48"
+											},
+											"meta": {
+												"scheme": "LEI",
+												"globalKey": "7bc454c3"
+											}
+										}
+									],
+									"name": {
+										"value": "SL-BANK"
+									},
+									"meta": {
+										"globalKey": "46f0d533"
+									}
+								}
+							}
+						},
+						{
+							"role": "Party2",
+							"partyReference": {
+								"value": {
+									"partyId": [
+										{
+											"identifier": {
+												"value": "8IBZUGJ7JPLH368JE346"
+											},
+											"meta": {
+												"scheme": "LEI",
+												"globalKey": "ebea26ef"
+											}
+										}
+									],
+									"name": {
+										"value": "BY-BANK"
+									},
+									"meta": {
+										"globalKey": "d7cfdd21"
+									}
+								}
+							}
+						}
+					]
+				},
+				"party": [
+					{
+						"partyId": [
+							{
+								"identifier": {
+									"value": "7245009UXRIGIRYOBR48"
+								},
+								"meta": {
+									"scheme": "LEI",
+									"globalKey": "7bc454c3"
+								}
+							}
+						],
+						"name": {
+							"value": "SL-BANK"
+						},
+						"meta": {
+							"globalKey": "46f0d533"
+						}
+					},
+					{
+						"partyId": [
+							{
+								"identifier": {
+									"value": "8IBZUGJ7JPLH368JE346"
+								},
+								"meta": {
+									"scheme": "LEI",
+									"globalKey": "ebea26ef"
+								}
+							}
+						],
+						"name": {
+							"value": "BY-BANK"
+						},
+						"meta": {
+							"globalKey": "d7cfdd21"
+						}
+					}
+				],
+				"partyRole": [
+					{
+						"partyReference": {
+							"globalReference": "46f0d533",
+							"externalReference": "8IBZUGJ7JPLH368JE346"
+						},
+						"role": "Seller"
+					},
+					{
+						"partyReference": {
+							"globalReference": "d7cfdd21",
+							"externalReference": "7245009UXRIGIRYOBR48"
+						},
+						"role": "Buyer"
+					}
+				],
+				"executionDetails": {
+					"executionType": "OffFacility",
+					"executionVenue": {
+						"name": {}
+					}
+				}
+			},
+			"state": {
+				"positionState": "Executed"
+			}
+		}
+	]
+}
